@@ -78,6 +78,7 @@
     "repos/",
     "comparisons/",
     "internal/",
+    "spikes/",
     "scripts/",
     "packages/create-foldkit-app/",
     "packages/devtools-mcp/",
