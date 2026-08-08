@@ -1,5 +1,25 @@
 # foldkit
 
+## 0.141.0
+
+### Minor Changes
+
+- ea9c4f3: Add `Update.foldChild`, the update half of embedding a child Submodel. It takes the facts that vary per child (the child `update`, an `Option`-returning `read`, `write`, `toParentMessage`, and `foldOutMessage` for children that emit OutMessages) and returns a dual `Update.Fold`: call it data-first in a handler (`foldSearch(model, message)`) or data-last to build an `Update.Step` that composes with `Update.combine` (`foldSearch(message)`). When `read` returns `None` the fold is a no-op, so a Message for an unmounted child does nothing. A parent that is itself a Submodel adds `toParentOutMessage` to lift the child's OutMessage into its own; that fold returns `Update.ReturnWithOutMessage`, carrying the parent's OutMessage channel.
+
+### Patch Changes
+
+- 35621da: Type `Command.mapEffect`, `Command.mapMessage`, and `Command.mapMessages` against `Command` in argument and result positions instead of structural command shapes. Inside a generic combinator the Message is an open type parameter, so `Command<Message>` stayed a deferred conditional that never unified with the structural shapes. A parent lifting a child Submodel's Commands, generic over the Message types, can now annotate arguments and returns as `Command.Command<Message>` directly:
+
+  ```ts
+  const liftCommands = <ChildMessage, ParentMessage>(
+    commands: ReadonlyArray<Command.Command<ChildMessage>>,
+    toParent: (message: ChildMessage) => ParentMessage,
+  ): ReadonlyArray<Command.Command<ParentMessage>> =>
+    Command.mapMessages(commands, toParent)
+  ```
+
+  Concrete call sites infer exactly as before.
+
 ## 0.140.1
 
 ### Patch Changes
