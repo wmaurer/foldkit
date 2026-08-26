@@ -1,4 +1,4 @@
-import { Effect, Option, Predicate } from 'effect'
+import { Effect, Fiber, Option, Predicate } from 'effect'
 import * as Dom from 'foldkit/dom'
 import type { ChildAttribute, HtmlBuilder } from 'foldkit/html'
 import * as Scene from 'foldkit/scene'
@@ -480,6 +480,74 @@ describe('Dialog', () => {
           yield* Dom.closeDialog('#focus-dialog')
           document.body.innerHTML = ''
         }),
+    )
+  })
+
+  describe('Command resource cleanup', () => {
+    it.effect(
+      'ShowDialog releases the scroll lock when the dialog is gone before it shows',
+      () =>
+        Effect.gen(function* () {
+          const showDialog = yield* ShowDialog({
+            id: 'missing-dialog',
+            focusSelector: initialFocusMarkerSelector,
+          }).effect
+
+          expect(showDialog).toEqual(Message.CompletedShowDialog())
+          expect(document.documentElement.style.overflow).not.toBe('hidden')
+        }),
+    )
+
+    it.effect(
+      'ShowDialog releases the scroll lock when it is interrupted before the dialog shows',
+      () =>
+        Effect.gen(function* () {
+          const showDialog = yield* Effect.forkChild(
+            ShowDialog({
+              id: 'missing-dialog',
+              focusSelector: initialFocusMarkerSelector,
+            }).effect,
+          )
+
+          yield* Effect.yieldNow
+          expect(document.documentElement.style.overflow).toBe('hidden')
+
+          yield* Fiber.interrupt(showDialog)
+
+          expect(document.documentElement.style.overflow).not.toBe('hidden')
+        }),
+    )
+
+    it.effect(
+      'CloseDialog releases the dialog resources when the dialog is gone before it closes',
+      () => {
+        const dialog = document.createElement('dialog')
+        dialog.id = 'vanishing-dialog'
+        document.body.appendChild(dialog)
+
+        return Effect.gen(function* () {
+          yield* ShowDialog({
+            id: 'vanishing-dialog',
+            focusSelector: initialFocusMarkerSelector,
+          }).effect
+
+          expect(document.documentElement.style.overflow).toBe('hidden')
+
+          dialog.remove()
+
+          const closeDialog = yield* CloseDialog({ id: 'vanishing-dialog' })
+            .effect
+
+          expect(closeDialog).toEqual(Message.CompletedCloseDialog())
+          expect(document.documentElement.style.overflow).not.toBe('hidden')
+        }).pipe(
+          Effect.ensuring(
+            Dom.releaseDialogResources('vanishing-dialog').pipe(
+              Effect.andThen(Effect.sync(() => dialog.remove())),
+            ),
+          ),
+        )
+      },
     )
   })
 

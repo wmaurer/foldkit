@@ -123,28 +123,36 @@ type UpdateReturn = Update.ReturnWithOutMessage<Model, Message, OutMessage>
  *  `Dom.showDialog`, which calls `show()` (not native `showModal()`) so other
  *  high-z-index overlays stay interactive. It layers the dialog with a high
  *  z-index, traps focus, and dispatches a `cancel` event on Esc. The Dialog
- *  component supplies its own backdrop. */
+ *  component supplies its own backdrop. If the dialog element is gone by the
+ *  time the show runs, the lock is released again. The same happens if the
+ *  Command is interrupted while it waits. A closed dialog has no `OnUnmount`,
+ *  so nothing else releases it. */
 export const ShowDialog = Command.define('ShowDialog', {
   args: { id: S.String, focusSelector: S.String },
   messages: [Message.CompletedShowDialog],
   execute: ({ id, focusSelector }) =>
     Dom.lockScroll.pipe(
       Effect.andThen(() =>
-        Dom.showDialog(dialogSelector(id), { focusSelector }),
+        Dom.showDialog(dialogSelector(id), { focusSelector }).pipe(
+          Effect.onError(() => Dom.unlockScroll),
+          Effect.ignore,
+        ),
       ),
-      Effect.ignore,
       Effect.as(Message.CompletedShowDialog()),
     ),
 })
 
-/** Calls `close()` on the native dialog element and unlocks page scroll. */
+/** Calls `close()` on the native dialog element and unlocks page scroll. If
+ *  the dialog element is gone by the time the close runs, it calls
+ *  `Dom.releaseDialogResources` instead, which releases anything the dialog
+ *  still holds. */
 export const CloseDialog = Command.define('CloseDialog', {
   args: { id: S.String },
   messages: [Message.CompletedCloseDialog],
   execute: ({ id }) =>
     Dom.closeDialog(dialogSelector(id)).pipe(
       Effect.andThen(() => Dom.unlockScroll),
-      Effect.ignore,
+      Effect.catch(() => Dom.releaseDialogResources(id)),
       Effect.as(Message.CompletedCloseDialog()),
     ),
 })
