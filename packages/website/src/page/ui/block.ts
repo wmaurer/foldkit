@@ -1,10 +1,14 @@
 import { UiComposition } from './composition'
+import { UiDefinition } from './definition'
 import { init } from './init'
 import { update } from './update'
 import { view } from './view'
 
-export const UiBlock = UiComposition.assembleBlock({
-  init,
-  update,
-  view,
-})
+const assembleUiBlock = () =>
+  UiComposition.assembleBlock({
+    init,
+    update,
+    view,
+  })
+
+export const UiBlock = UiDefinition.produceBlock(assembleUiBlock)
