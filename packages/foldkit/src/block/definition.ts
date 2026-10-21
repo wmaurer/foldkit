@@ -59,7 +59,11 @@ import {
   descendantOwnersOf,
   registerRuntimeBindings,
 } from './composition.js'
-import { type DefaultViewTypeId, registerDefaultView } from './defaultView.js'
+import {
+  type DefaultViewTypeId,
+  defaultViewOf,
+  registerDefaultView,
+} from './defaultView.js'
 import {
   type AuthoredMessage,
   type CompositionDeliveryArguments,
@@ -129,6 +133,7 @@ type AnySchema = Schema.Codec<any, any, any, any>
 type AnyFunction = (...args: ReadonlyArray<any>) => any
 
 const compositions = new WeakSet<object>()
+const producingDefinitions = new WeakMap<object, object>()
 
 /** @internal Tests whether a value is a Composition created by Foldkit. */
 export const isComposition = (value: unknown): value is object =>
@@ -4223,6 +4228,10 @@ export const makeDefinition = (
     })
     registerBlockHostIdentities(block, hostIdentities)
 
+    if (authoring !== undefined) {
+      producingDefinitions.set(block, authoring)
+    }
+
     return block
   }
 
@@ -4356,6 +4365,51 @@ export const makeBaseDefinition = (
     return publicComposition
   }
 
+  const makeProduce =
+    (isViewRequired: boolean) =>
+    (produce: unknown): unknown => {
+      const method = isViewRequired ? 'produceBlock' : 'produceViewlessBlock'
+
+      if (!Predicate.isFunction(produce)) {
+        throw new Error(
+          `[foldkit] Block "${owner.id}" ${method} requires a function that returns the Block assembled from this Definition's Composition.`,
+        )
+      }
+
+      const block = produce()
+      const producingDefinition = Predicate.isObject(block)
+        ? producingDefinitions.get(block)
+        : undefined
+
+      if (producingDefinition === undefined) {
+        throw new Error(
+          `[foldkit] Block "${owner.id}" ${method} received a value that is not a completed Block. Return the Block assembled from this Definition's Composition.`,
+        )
+      }
+
+      if (producingDefinition !== base) {
+        throw new Error(
+          `[foldkit] Block "${owner.id}" ${method} received a Block assembled from a different Definition. Return the Block assembled from this Definition's Composition.`,
+        )
+      }
+
+      const hasView = defaultViewOf(block) !== undefined
+
+      if (isViewRequired && !hasView) {
+        throw new Error(
+          `[foldkit] Block "${owner.id}" ${method} received a Block without a default view. Use produceViewlessBlock.`,
+        )
+      }
+
+      if (!isViewRequired && hasView) {
+        throw new Error(
+          `[foldkit] Block "${owner.id}" ${method} received a Block with a default view. Use produceBlock.`,
+        )
+      }
+
+      return block
+    }
+
   return {
     owner: base.owner,
     Model: base.Model,
@@ -4381,6 +4435,8 @@ export const makeBaseDefinition = (
     makeManagedResources: base.makeManagedResources,
     makeBinding: base.makeBinding,
     makeComposition,
+    produceBlock: makeProduce(true),
+    produceViewlessBlock: makeProduce(false),
   }
 }
 // oxlint-enable effecttsgo/any-unknown-in-error-context

@@ -318,15 +318,7 @@ export function makeNamespace(id: string): any {
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions */
     ) => base.makeComposition(graph as never)
 
-    const produceBlock = (produce: () => unknown): unknown => produce()
-
-    return {
-      ...base,
-      ...primitives,
-      makeComposition,
-      produceBlock,
-      produceViewlessBlock: produceBlock,
-    }
+    return { ...base, ...primitives, makeComposition }
   }
 
   return { ...primitives, makeDefinition }
