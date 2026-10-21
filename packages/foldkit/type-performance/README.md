@@ -217,8 +217,8 @@ place. No fixture was narrowed and no rejection test was removed.
 ## Source Model Schema boundaries
 
 The Website's parent Model composes canonical child Schemas exported from
-feature barrels. It uses `Ui.Model` when declaring state and the completed
-`UiBlock` for Bindings. This prevents a Schema query from demanding the inferred
+feature barrels. It uses `Home.Model` when declaring state and the completed
+`HomeBlock` for Bindings. This prevents a Schema query from demanding the inferred
 child implementation, including unrelated views and child policies. It does not
 change assembly validation or runtime behavior.
 
@@ -246,3 +246,6 @@ TypeScript 7.0.2 reports slightly different instantiation counts for the same
 input across runs, with or without `--singleThreaded`. In 22 runs this fixture
 measured 622,271, 622,421, or 625,053 instantiations, and the ceiling is the
 highest of those. Types did not vary.
+
+The Website's `uiPages` field reads `UiBlock.Model` from a produced Block, so
+the Ui feature barrel exports only `UiBlock`.

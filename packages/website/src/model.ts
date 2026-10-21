@@ -11,7 +11,7 @@ import * as BlockPage from './page/core/blockPage'
 import * as ExampleDetail from './page/example'
 import * as Home from './page/home'
 import * as Playground from './page/playground'
-import * as Ui from './page/ui'
+import { UiBlock } from './page/ui'
 import { ApplicationRoute } from './route'
 import * as Search from './search'
 import { SidebarGroups } from './sidebarStorage'
@@ -42,7 +42,7 @@ export const Model = Schema.Struct({
   maybeThemePreference: Schema.Option(ThemePreference),
   systemTheme: ResolvedTheme,
   resolvedTheme: ResolvedTheme,
-  uiPages: Ui.Model,
+  uiPages: UiBlock.Model,
   comingFromReact: ComingFromReact.Model,
   apiReference: ApiReference.Model,
   exampleDetail: ExampleDetail.Model,
