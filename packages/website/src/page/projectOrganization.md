@@ -203,6 +203,8 @@ Consumers use a feature namespace such as `Products.Model` when composing source
 
 Reading `ProductsBlock.Model` from an inferred source Block can make TypeScript resolve the feature's init, update, views, and child graph before it can check the parent Model. Re-exporting the exact `Model` value already passed to the Definition lets the parent declare its Schema without that inference dependency. The Website uses this boundary for its source features to keep editor requests responsive.
 
+A Block published with `ProductsDefinition.produceBlock(assembleProductsBlock)` takes `ProductsBlock.Model` from the Definition, so reading it has no inference dependency and the barrel needs no separate `Model` export. Pass a named producer, because an inline one makes TypeScript check the `assembleBlock` call against the producer's own return type.
+
 Do not reconstruct the Schema, annotate away its Codec channels, or create another generic Block instance to obtain a Model. Assembly still checks the completed implementation and its requirements. This is a type dependency boundary; an ESM barrel still loads its re-exported modules normally.
 
 Only the Model Schema has this early export. The local `Message` contains local facts; the completed Block's `Message` includes generated child envelopes. Keep using that complete contract at dispatch boundaries. A published UI component or generic factory may already provide its Schema through an explicit declaration, so consuming its completed Model does not require another source contract export.
