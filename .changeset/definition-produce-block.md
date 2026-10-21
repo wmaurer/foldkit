@@ -1,0 +1,18 @@
+---
+'foldkit': minor
+---
+
+Add `Definition.produceBlock` and `Definition.produceViewlessBlock`. Each publishes the completed Block that a producer function assembles from the Definition's Composition. The produced Block's `Model`, `OutMessage`, and `owner` types come from the Definition, so a parent Schema that reads `ChildBlock.Model` does not make TypeScript check the child's `assembleBlock` call. Bindings, Programs, and `Block.AnyBlock` see the same members as the assembled Block.
+
+```ts
+const assembleUiBlock = () =>
+  UiComposition.assembleBlock({ init, update, view })
+
+export const UiBlock = UiDefinition.produceBlock(assembleUiBlock)
+```
+
+Use `produceBlock` for a Block with a default view and `produceViewlessBlock` for one without. The producer takes no parameters and returns the `assembleBlock` result, or a `replaceEffectsLayer` or `provideHandlers` result of it. Pass a named producer: an inline `produceBlock(() => Composition.assembleBlock(...))` makes TypeScript check the `assembleBlock` call against the function's own return type, which costs several times the checking work of the named form.
+
+The methods call the producer once and return the identical Block. They throw when the producer is not a function, returns a value that is not a completed Block, returns a Block assembled from a different Definition, or disagrees with the method on default view presence. When the producer's types show the mistake, it is also a type error where a Binding, Program, or `Block.AnyBlock` first uses the produced Block. Two Definitions with the same id and Schemas have the same types, so only the runtime check tells them apart. A producer that adds members to the completed Block is a type error; add them to the produced Block instead.
+
+The exported `ProducedBlockWithView`, `ProducedBlockWithViewAndOutMessage`, `ProducedBlockWithOutMessage`, and `ProducedBlockWithoutViewOrOutMessage` types name produced Blocks in emitted declarations.
