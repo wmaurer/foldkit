@@ -183,9 +183,9 @@ export type AuthoringDefinition<
      *
      * Pass a named producer, such as
      * `const assembleUiBlock = () => UiComposition.assembleBlock({ init, update, view })`.
-     * TypeScript types an inline function argument's `assembleBlock` call
-     * against the argument's own return type, which costs several times the
-     * named form's checking work.
+     * With an inline function, TypeScript checks the `assembleBlock` call
+     * against that function's own return type, which costs several times the
+     * checking work of the named form.
      *
      * Calls `produce` once and returns the identical Block. Throws when the
      * Block was not assembled from this Definition or has no default view.
@@ -201,8 +201,7 @@ export type AuthoringDefinition<
     >
     /**
      * Publishes the completed Block without a default view that `produce`
-     * assembles from this Definition's Composition. A parent renders such a
-     * Block only through views it selects. Otherwise the same as
+     * assembles from this Definition's Composition. Otherwise the same as
      * `produceBlock`. Throws when the Block was not assembled from this
      * Definition or has a default view.
      */
