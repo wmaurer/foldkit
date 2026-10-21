@@ -12,6 +12,10 @@
     "command-requirements-200": {
       "maxInstantiationsDelta": 2659415,
       "maxTypesDelta": 389460
+    },
+    "produced-composition-8": {
+      "maxInstantiationsDelta": 625053,
+      "maxTypesDelta": 46321
     }
   }
 }

@@ -11,6 +11,10 @@
     {
       "name": "command-requirements-200",
       "file": "command-requirements-200.ts"
+    },
+    {
+      "name": "produced-composition-8",
+      "file": "produced-composition-8.ts"
     }
   ]
 }

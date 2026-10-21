@@ -227,3 +227,22 @@ Codec channels, Service requirements, operation arguments, and registration
 checks through the public barrel, then emits and relocates the consumer. The actual-file editor benchmark above
 measures the source dependency. A full-program count does not establish that an
 editor demand boundary is cheap: the compiler must still validate the producer.
+
+## Produced Block boundaries
+
+`produced-composition-8` is `deep-composition-8` with every Block published
+through its Definition and a named producer. The leaf and the eight levels use
+`produceViewlessBlock`, and the Application root uses `produceBlock`. The
+fixture gates the cost of the produced Block shapes and the producer check that
+each produced member reads.
+
+The ceiling also guards the producer form. With an inline producer,
+`produceViewlessBlock(() => Composition.assembleBlock({ ... }))`, TypeScript
+checks the `assembleBlock` call against the function's own return type. Making
+only `Level008` inline raised the fixture from 622,421 to 1,253,018
+instantiations and from 46,321 to 128,913 types, so the check fails.
+
+TypeScript 7.0.2 reports slightly different instantiation counts for the same
+input across runs, with or without `--singleThreaded`. In 22 runs this fixture
+measured 622,271, 622,421, or 625,053 instantiations, and the ceiling is the
+highest of those. Types did not vary.
