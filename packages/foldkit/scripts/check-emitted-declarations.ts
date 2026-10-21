@@ -438,12 +438,30 @@ const assertPortableDeclarations = (directory: string): void => {
   }
 }
 
+const assertEmittedFragments = (
+  name: string,
+  directory: string,
+  fragmentsByFile: Readonly<Record<string, ReadonlyArray<string>>>,
+): void => {
+  for (const [file, fragments] of Object.entries(fragmentsByFile)) {
+    const source = readFileSync(join(directory, file), 'utf8')
+    for (const fragment of fragments) {
+      if (!source.includes(fragment)) {
+        fail(
+          `Emitted declaration ${file} for ${name} does not contain ${fragment}.`,
+        )
+      }
+    }
+  }
+}
+
 const checks: ReadonlyArray<
   Readonly<{
     name: string
     accepted: ReadonlyArray<string>
     rejected: ReadonlyArray<string>
     consumers: ReadonlyArray<string>
+    emittedFragments?: Readonly<Record<string, ReadonlyArray<string>>>
   }>
 > = [
   {
@@ -668,6 +686,18 @@ const checks: ReadonlyArray<
     rejected: ['startup-defaults.rejected.ts'],
     consumers: ['startup-defaults.consume.ts'],
   },
+  {
+    name: 'produced-block',
+    accepted: ['produced-block.accepted.ts'],
+    rejected: ['produced-block.rejected.ts'],
+    consumers: ['produced-block.consume.ts'],
+    emittedFragments: {
+      'produced-block-block.d.ts': [
+        'ViewBlock: import("foldkit/block").ProducedBlockWithView<',
+        ', typeof assembleViewBlock>',
+      ],
+    },
+  },
 ]
 
 const main = async (): Promise<void> => {
@@ -722,6 +752,7 @@ const main = async (): Promise<void> => {
         acceptedConfig,
       ])
       assertPortableDeclarations(output)
+      assertEmittedFragments(check.name, output, check.emittedFragments ?? {})
 
       const rejectedConfig = join(emitter, `${check.name}.rejected.json`)
       writeFileSync(
