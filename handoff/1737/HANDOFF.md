@@ -4,8 +4,8 @@ This is a temporary handoff branch on the `wmaurer` remote. It is not for review
 
 ## Branch layout
 
-- `wm/1737-produce-block-handoff` is the PR-ready series (9 commits on `9a5f9307c`, the tip of `codex/preview-followups`) plus one top commit that adds this `handoff/1737/` folder.
-- The PR-ready branch is the parent of the top commit. Recreate it with `git branch wm/1737-produce-block-pr wm/1737-produce-block-handoff~1`. It was also pushed as `wm/1737-produce-block-pr`.
+- `wm/1737-produce-block-handoff` is the PR-ready series (9 commits on `9a5f9307c`, the tip of `codex/preview-followups`) plus `chore` commits on top that only touch this `handoff/1737/` folder.
+- The PR-ready series ends at `20f29c483`, which was also pushed as `wm/1737-produce-block-pr`. Use that branch directly, or recreate it with `git branch wm/1737-produce-block-pr 20f29c483`.
 - The measurement series on the slow baseline `65d1cd9c` is in `measurement-branch/` as patches. To recreate it, first copy the patches out of the tree, because switching away from this branch removes `handoff/`: `cp -r handoff/1737/measurement-branch /tmp/1737-patches`. Then fetch the base with `git fetch origin 65d1cd9c3031fa69ca23e5c2de7c31fd7371d5c7` and run `git switch -c wm/1737-produce-block 65d1cd9c3031fa69ca23e5c2de7c31fd7371d5c7 && git am /tmp/1737-patches/*.patch`. Use it to benchmark the original slow path, because on the integration tip the Schema re-export workaround hides that path.
 
 ## Starting a new session
@@ -48,6 +48,18 @@ Gates at the PR head exit 0:
 ## Trail
 
 [decisions.tsv](decisions.tsv) is the decision log, with one row per decision. [todo.md](todo.md) holds the Feature playbook steps. [trail-review.md](trail-review.md) is a cross-model review of the trail with 11 flags. Flag 1, no benchmark on the tip, was closed by the paired run above.
+
+## Limits of this handoff
+
+- Timings are tied to the original machine. Compare a new measurement only against a baseline measured on the same machine. On a new machine, rerun the benchmark at `65d1cd9c` (the measurement branch's base) or at `9a5f9307c` before you compare against anything here. The repository's own harness, `node packages/foldkit/scripts/profile-block-language-service.ts --runs 3 --timeout-ms 30000`, runs anywhere. Run it alone, after a fresh `pnpm build:packages`.
+- Instantiation counts carry over, because they do not depend on the machine. TS 7.0.2 still varies them slightly between runs (see `impl/deviations.md`).
+- Probe and helper scripts hard-code paths from the original machine. Examples are `impl/tools/measure-website.sh`, `impl/tools/mutate-gate.sh`, the candidate probes, and their `tsconfig` files. Before rerunning one, replace the `.../scratchpad` prefix with `handoff/1737`, and replace worktree paths with checkouts of the branches above. `repro/measure.mjs` and `repro/lsp.mjs` take the compiler path and directory as arguments, so they run as is.
+- Compiler traces from the inline-producer cause analysis (1.2GB) are not included. `measure-forms.md` records the commands that regenerate them.
+- The session and subagent transcripts are not included. `trail-review.md` is the record of the trail audit against them.
+- The user's working preferences for this task:
+  - work through pstack, delegating to subagents;
+  - prototype before posting anything;
+  - post on the issue or open a PR only after review and with the user's go-ahead.
 
 ## Next steps
 
