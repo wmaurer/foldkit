@@ -84,6 +84,12 @@ export type {
   RefineViewInputs,
 } from './definition.js'
 export { makeDefinition, makeNamespace } from './define.js'
+export type {
+  ProducedBlockWithOutMessage,
+  ProducedBlockWithView,
+  ProducedBlockWithViewAndOutMessage,
+  ProducedBlockWithoutViewOrOutMessage,
+} from './produced.js'
 export type { DefineStepFields, DefineStepNoop } from './fieldStep.js'
 export type { CommandsStep, MakeCommandsStep } from './commandsStep.js'
 export type {

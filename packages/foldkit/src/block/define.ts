@@ -13,6 +13,7 @@ import {
   makeAuthoringContext,
 } from './named.js'
 import type { Owner } from './owner.js'
+import type { ProducedBlockFor } from './produced.js'
 
 type AnySchema = Schema.Codec<any, any, any, any>
 
@@ -167,6 +168,53 @@ export type AuthoringDefinition<
       Concrete,
       ChildInitContextSchema
     >
+    /**
+     * Publishes the completed Block with a default view that `produce`
+     * assembles from this Definition's Composition. `produce` takes no
+     * parameters and returns the `assembleBlock` result, or a
+     * `replaceEffectsLayer` or `provideHandlers` result of it.
+     *
+     * The Block's `owner`, `Model`, and `OutMessage` types come from this
+     * Definition, so a parent that reads `ChildBlock.Model` does not type the
+     * Composition or the implementation. Every other member is typed from the
+     * producer when a Binding, Program, or other consumer first reads it, and a
+     * producer that returns any other value makes that consumer report the
+     * reason.
+     *
+     * Pass a named producer, such as
+     * `const assembleUiBlock = () => UiComposition.assembleBlock({ init, update, view })`.
+     * TypeScript types an inline function argument's `assembleBlock` call
+     * against the argument's own return type, which costs several times the
+     * named form's checking work.
+     *
+     * Calls `produce` once and returns the identical Block. Throws when the
+     * Block was not assembled from this Definition or has no default view.
+     */
+    produceBlock: <Producer>(
+      produce: Producer,
+    ) => ProducedBlockFor<
+      Owner<Id, Concrete>,
+      ModelSchema,
+      OutMessageSchema,
+      'View',
+      Producer
+    >
+    /**
+     * Publishes the completed Block without a default view that `produce`
+     * assembles from this Definition's Composition. A parent renders such a
+     * Block only through views it selects. Otherwise the same as
+     * `produceBlock`. Throws when the Block was not assembled from this
+     * Definition or has a default view.
+     */
+    produceViewlessBlock: <Producer>(
+      produce: Producer,
+    ) => ProducedBlockFor<
+      Owner<Id, Concrete>,
+      ModelSchema,
+      OutMessageSchema,
+      'Viewless',
+      Producer
+    >
   }>
 
 /** Establishes Model, Message, and optional OutMessage Schemas under an already
@@ -270,7 +318,15 @@ export function makeNamespace(id: string): any {
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions */
     ) => base.makeComposition(graph as never)
 
-    return { ...base, ...primitives, makeComposition }
+    const produceBlock = (produce: () => unknown): unknown => produce()
+
+    return {
+      ...base,
+      ...primitives,
+      makeComposition,
+      produceBlock,
+      produceViewlessBlock: produceBlock,
+    }
   }
 
   return { ...primitives, makeDefinition }

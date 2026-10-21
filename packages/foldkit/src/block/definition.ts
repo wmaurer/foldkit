@@ -2030,6 +2030,22 @@ interface BlockContract<
       ImplementationValue
     > {}
 
+/** @internal The completed Block contract at its widest instantiation. Produced
+ * Blocks derive their member keys, modifiers, and documentation from it. */
+export type BlockContractTemplate = BlockContract<
+  Owner<string>,
+  AnySchema,
+  AnySchema,
+  AnySchema | undefined,
+  ReadonlyArray<Mount.LayeredMountDefinition>,
+  ReadonlyArray<AnyBinding>,
+  Readonly<{
+    init: AnyFunction
+    update: AnyFunction
+    EffectsLayer: AnyLayer
+  }>
+>
+
 /**
  * A completed Block with an OutMessage Schema and a default view. The
  * contract retains its exact lifecycle registrations, child graph, Layer
