@@ -1,0 +1,36 @@
+$ node scripts/build-public-packages.mjs
+Scope: 9 of 53 workspace projects
+packages/create-foldkit-app build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/build-templates.mjs
+packages/foldkit build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/oxlint-plugin-foldkit build$ pnpm run clean && rolldown -c rolldown.config.ts && tsc -b tsconfig.build.json && node scripts/generate-presets.mjs
+packages/foldkit build: $ rimraf dist *.tsbuildinfo
+packages/oxlint-plugin-foldkit build: $ rimraf dist recommended.json all.json *.tsbuildinfo
+packages/create-foldkit-app build: $ rimraf dist *.tsbuildinfo
+packages/oxlint-plugin-foldkit build: <DIR>/index.js  chunk │ size: 636.61 kB
+packages/oxlint-plugin-foldkit build: ✔ rolldown v1.2.11 Finished in 127.50 ms
+packages/oxlint-plugin-foldkit build: Done
+packages/create-foldkit-app build: Done
+packages/foldkit build: Done
+packages/node build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/markdown build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/vite-plugin-foldkit build$ pnpm run clean && tsc -b
+packages/node build: $ rimraf dist *.tsbuildinfo
+packages/vite-plugin-foldkit build: $ rimraf dist *.tsbuildinfo
+packages/markdown build: $ rimraf dist *.tsbuildinfo
+packages/vite-plugin-foldkit build: Done
+packages/node build: Done
+packages/markdown build: Done
+packages/devtools-mcp build$ pnpm run clean && tsc -b && pnpm run bundle
+packages/ui build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/brand-dist.mjs
+packages/ui build: $ rimraf dist *.tsbuildinfo
+packages/devtools-mcp build: $ rimraf dist *.tsbuildinfo
+packages/devtools-mcp build: $ rolldown -c rolldown.config.ts
+packages/devtools-mcp build: <DIR>/server.js  chunk │ size: 1,563.15 kB
+packages/devtools-mcp build: ✔ rolldown v1.2.11 Finished in 163.86 ms
+packages/devtools-mcp build: Done
+packages/ui build: brand-dist(@foldkit/ui): branded 49 files, skipped 77
+packages/ui build: Done
+packages/devtools build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/brand-dist.mjs
+packages/devtools build: $ rimraf dist *.tsbuildinfo
+packages/devtools build: brand-dist(@foldkit/devtools): branded 2 files, skipped 2
+packages/devtools build: Done

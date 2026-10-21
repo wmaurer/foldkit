@@ -1,0 +1,517 @@
+From 68765424627d1ecf8ec9bde761c04110a8639e5c Mon Sep 17 00:00:00 2001
+From: Wayne Maurer <wmaurer@users.noreply.github.com>
+Date: Wed, 21 Oct 2026 14:55:33 +0200
+Subject: [PATCH 2/8] feat(foldkit): type produced Blocks from one producer
+ verdict
+
+Definitions gain produceBlock and produceViewlessBlock. The method name
+selects view presence, and the Definition's OutMessage Schema selects
+OutMessage presence, so the produced shape never reads the producer.
+owner, Model, and OutMessage come from the Definition. Every other member
+is mapped over the completed Block contract's keys and reads one cached
+verdict: the producer's completed Block, or an InvalidBlockProducer that
+names the reason. The verdict rejects a producer that is not a nullary
+function, returns any or never, belongs to another Definition, disagrees
+on view or OutMessage presence, or adds or drops members.
+---
+ packages/foldkit/src/block/define.ts     |  59 +++-
+ packages/foldkit/src/block/definition.ts |  16 ++
+ packages/foldkit/src/block/produced.ts   | 337 ++++++++++++++++++-----
+ packages/foldkit/src/block/public.ts     |   1 -
+ 4 files changed, 336 insertions(+), 77 deletions(-)
+
+diff --git a/packages/foldkit/src/block/define.ts b/packages/foldkit/src/block/define.ts
+index 10d8dfc6e..1e41b8a44 100644
+--- a/packages/foldkit/src/block/define.ts
++++ b/packages/foldkit/src/block/define.ts
+@@ -13,7 +13,7 @@ import {
+   makeAuthoringContext,
+ } from './named.js'
+ import type { Owner } from './owner.js'
+-import type { ProducedCompositionBlock } from './produced.js'
++import type { ProducedBlockFor } from './produced.js'
+ 
+ type AnySchema = Schema.Codec<any, any, any, any>
+ 
+@@ -168,12 +168,53 @@ export type AuthoringDefinition<
+       Concrete,
+       ChildInitContextSchema
+     >
+-    /** Returns the completed Block that `produce` assembles. The Block's `Model`
+-     * comes from this Definition, so a parent reading it does not infer the
+-     * Composition or the implementation. */
++    /**
++     * Publishes the completed Block with a default view that `produce`
++     * assembles from this Definition's Composition. `produce` takes no
++     * parameters and returns the `assembleBlock` result, or a
++     * `replaceEffectsLayer` or `provideHandlers` result of it.
++     *
++     * The Block's `owner`, `Model`, and `OutMessage` types come from this
++     * Definition, so a parent that reads `ChildBlock.Model` does not type the
++     * Composition or the implementation. Every other member is typed from the
++     * producer when a Binding, Program, or other consumer first reads it, and a
++     * producer that returns any other value makes that consumer report the
++     * reason.
++     *
++     * Pass a named producer, such as
++     * `const assembleUiBlock = () => UiComposition.assembleBlock({ init, update, view })`.
++     * TypeScript types an inline function argument's `assembleBlock` call
++     * against the argument's own return type, which costs several times the
++     * named form's checking work.
++     *
++     * Calls `produce` once and returns the identical Block. Throws when the
++     * Block was not assembled from this Definition or has no default view.
++     */
+     produceBlock: <Producer>(
+       produce: Producer,
+-    ) => ProducedCompositionBlock<ModelSchema, OutMessageSchema, Producer>
++    ) => ProducedBlockFor<
++      Owner<Id, Concrete>,
++      ModelSchema,
++      OutMessageSchema,
++      'View',
++      Producer
++    >
++    /**
++     * Publishes the completed Block without a default view that `produce`
++     * assembles from this Definition's Composition. A parent renders such a
++     * Block only through views it selects. Otherwise the same as
++     * `produceBlock`. Throws when the Block was not assembled from this
++     * Definition or has a default view.
++     */
++    produceViewlessBlock: <Producer>(
++      produce: Producer,
++    ) => ProducedBlockFor<
++      Owner<Id, Concrete>,
++      ModelSchema,
++      OutMessageSchema,
++      'Viewless',
++      Producer
++    >
+   }>
+ 
+ /** Establishes Model, Message, and optional OutMessage Schemas under an already
+@@ -279,7 +320,13 @@ export function makeNamespace(id: string): any {
+ 
+     const produceBlock = (produce: () => unknown): unknown => produce()
+ 
+-    return { ...base, ...primitives, makeComposition, produceBlock }
++    return {
++      ...base,
++      ...primitives,
++      makeComposition,
++      produceBlock,
++      produceViewlessBlock: produceBlock,
++    }
+   }
+ 
+   return { ...primitives, makeDefinition }
+diff --git a/packages/foldkit/src/block/definition.ts b/packages/foldkit/src/block/definition.ts
+index ab0b9b2e5..86a8d8ae9 100644
+--- a/packages/foldkit/src/block/definition.ts
++++ b/packages/foldkit/src/block/definition.ts
+@@ -2030,6 +2030,22 @@ interface BlockContract<
+       ImplementationValue
+     > {}
+ 
++/** @internal The completed Block contract at its widest instantiation. Produced
++ * Blocks derive their member keys, modifiers, and documentation from it. */
++export type BlockContractTemplate = BlockContract<
++  Owner<string>,
++  AnySchema,
++  AnySchema,
++  AnySchema | undefined,
++  ReadonlyArray<Mount.LayeredMountDefinition>,
++  ReadonlyArray<AnyBinding>,
++  Readonly<{
++    init: AnyFunction
++    update: AnyFunction
++    EffectsLayer: AnyLayer
++  }>
++>
++
+ /**
+  * A completed Block with an OutMessage Schema and a default view. The
+  * contract retains its exact lifecycle registrations, child graph, Layer
+diff --git a/packages/foldkit/src/block/produced.ts b/packages/foldkit/src/block/produced.ts
+index d43544b5f..b1e5cbd37 100644
+--- a/packages/foldkit/src/block/produced.ts
++++ b/packages/foldkit/src/block/produced.ts
+@@ -1,95 +1,292 @@
+ import type { Schema } from 'effect'
+ 
+ import type { DefaultViewTypeId } from './defaultView.js'
+-import type { LocalEffectsLayerTypeId, LocalMountsTypeId } from './definition.js'
+-
+-type InvalidBlockProducer = Readonly<{
+-  'Block producer must return a completed Block': never
+-}>
+-
+-type ProducedMember<Producer, Key extends PropertyKey> = [Producer] extends [never]
+-  ? InvalidBlockProducer
+-  : Producer extends (...args: ReadonlyArray<any>) => infer Completed
+-    ? [Completed] extends [never]
+-      ? InvalidBlockProducer
+-      : Key extends keyof Completed
+-        ? Completed[Key]
+-        : InvalidBlockProducer
+-    : InvalidBlockProducer
++import type { BlockContractTemplate } from './definition.js'
++import type { Owner } from './owner.js'
+ 
+-interface ProducedBlockFields<
+-  ModelSchema extends Schema.Codec<any, any, any, any>,
+-  Producer,
++type AnySchema = Schema.Codec<any, any, any, any>
++
++type DefinitionKey = 'owner' | 'Model' | 'OutMessage' | typeof DefaultViewTypeId
++
++type CompletedBlockKey =
++  | keyof BlockContractTemplate
++  | 'OutMessage'
++  | typeof DefaultViewTypeId
++
++type ProducerKey = Exclude<keyof BlockContractTemplate, DefinitionKey>
++
++/** @internal Whether a produced Block declares a default view. The produce
++ * method's name decides it, never the producer. */
++export type ViewPresence = 'View' | 'Viewless'
++
++interface ProducerExpectation<
++  OwnerValue,
++  ModelSchema,
++  OutMessageSchema,
++  View extends ViewPresence,
+ > {
++  readonly owner: OwnerValue
+   readonly Model: ModelSchema
+-  readonly owner: ProducedMember<Producer, 'owner'>
+-  readonly Message: ProducedMember<Producer, 'Message'>
+-  readonly mounts: ProducedMember<Producer, 'mounts'>
+-  readonly [LocalMountsTypeId]: ProducedMember<Producer, typeof LocalMountsTypeId>
+-  readonly bindings: ProducedMember<Producer, 'bindings'>
+-  readonly init: ProducedMember<Producer, 'init'>
+-  readonly update: ProducedMember<Producer, 'update'>
+-  readonly operations: ProducedMember<Producer, 'operations'>
+-  readonly subscriptions: ProducedMember<Producer, 'subscriptions'>
+-  readonly managedResources: ProducedMember<Producer, 'managedResources'>
+-  readonly EffectsLayer: ProducedMember<Producer, 'EffectsLayer'>
+-  readonly [LocalEffectsLayerTypeId]: ProducedMember<
+-    Producer,
+-    typeof LocalEffectsLayerTypeId
+-  >
+-  readonly __blockHandlerRequirements: ProducedMember<
+-    Producer,
+-    '__blockHandlerRequirements'
+-  >
+-  readonly hostHandlers: ProducedMember<Producer, 'hostHandlers'>
+-  readonly makeView: ProducedMember<Producer, 'makeView'>
+-  readonly replaceEffectsLayer: ProducedMember<Producer, 'replaceEffectsLayer'>
+-  readonly provideHandlers: ProducedMember<Producer, 'provideHandlers'>
++  readonly OutMessage: OutMessageSchema
++  readonly view: View
++}
++
++type AnyProducerExpectation = ProducerExpectation<any, any, any, ViewPresence>
++
++declare const InvalidBlockProducerTypeId: unique symbol
++
++interface InvalidBlockProducer<Reason extends string, Evidence = never> {
++  readonly [InvalidBlockProducerTypeId]: Reason
++  readonly evidence: Evidence
+ }
+ 
+-/** Retains an independent Model Schema and a producer's exact completed capabilities. */
++type IsAny<Value> = 0 extends 1 & Value ? true : false
++
++type IsMutual<Left, Right> = [Left, Right] extends [Right, Left] ? true : false
++
++type NotNullaryProducer =
++  InvalidBlockProducer<'Block producer must be a function with no parameters'>
++
++type NotCompletedBlock =
++  InvalidBlockProducer<'Block producer must return a completed Block'>
++
++type ForeignBlock<ProducedOwner> = InvalidBlockProducer<
++  'Block producer must return a Block of this Definition',
++  ProducedOwner
++>
++
++type OutMessageAgrees<Completed, OutMessageSchema> =
++  OutMessageSchema extends AnySchema
++    ? Completed extends Readonly<{ OutMessage: infer ProducedOutMessage }>
++      ? IsMutual<ProducedOutMessage, OutMessageSchema>
++      : false
++    : Completed extends Readonly<{ OutMessage: unknown }>
++      ? false
++      : true
++
++type ViewAgrees<Completed, View extends ViewPresence> =
++  Completed extends Readonly<{ [DefaultViewTypeId]: unknown }>
++    ? View extends 'View'
++      ? true
++      : InvalidBlockProducer<'produceViewlessBlock requires a Block without a default view. Use produceBlock.'>
++    : View extends 'View'
++      ? InvalidBlockProducer<'produceBlock requires a Block with a default view. Use produceViewlessBlock.'>
++      : true
++
++type KeysAgree<Completed> = [
++  Exclude<keyof Completed, CompletedBlockKey>,
++] extends [never]
++  ? [Exclude<ProducerKey, keyof Completed>] extends [never]
++    ? true
++    : NotCompletedBlock
++  : InvalidBlockProducer<
++      'Block producer must return the completed Block. Add members to the produced Block instead.',
++      Exclude<keyof Completed, CompletedBlockKey>
++    >
++
++type CompletionOf<Expectation extends AnyProducerExpectation, Completed> =
++  IsAny<Completed> extends true
++    ? InvalidBlockProducer<'Block producer must not return any'>
++    : [Completed] extends [never]
++      ? NotCompletedBlock
++      : Completed extends Readonly<{
++            owner: infer ProducedOwner
++            Model: infer ProducedModel
++          }>
++        ? IsMutual<ProducedOwner, Expectation['owner']> extends true
++          ? IsMutual<ProducedModel, Expectation['Model']> extends true
++            ? OutMessageAgrees<
++                Completed,
++                Expectation['OutMessage']
++              > extends true
++              ? ViewAgrees<
++                  Completed,
++                  Expectation['view']
++                > extends infer ViewVerdict
++                ? ViewVerdict extends true
++                  ? KeysAgree<Completed> extends infer KeysVerdict
++                    ? KeysVerdict extends true
++                      ? readonly [Completed]
++                      : KeysVerdict
++                    : never
++                  : ViewVerdict
++                : never
++              : ForeignBlock<ProducedOwner>
++            : ForeignBlock<ProducedOwner>
++          : ForeignBlock<ProducedOwner>
++        : NotCompletedBlock
++
++type ProducedCompletion<Expectation extends AnyProducerExpectation, Producer> =
++  IsAny<Producer> extends true
++    ? NotNullaryProducer
++    : [Producer] extends [never]
++      ? NotNullaryProducer
++      : Producer extends () => infer Completed
++        ? CompletionOf<Expectation, Completed>
++        : NotNullaryProducer
++
++type ProducedMember<
++  Expectation extends AnyProducerExpectation,
++  Producer,
++  Key extends PropertyKey,
++> =
++  ProducedCompletion<Expectation, Producer> extends infer Completion
++    ? Completion extends readonly [infer Completed]
++      ? Key extends keyof Completed
++        ? Completed[Key]
++        : NotCompletedBlock
++      : Completion
++    : never
++
++type ProducerMembers<Expectation extends AnyProducerExpectation, Producer> = {
++  readonly [
++    Key in keyof BlockContractTemplate as Key extends DefinitionKey
++      ? never
++      : Key
++  ]: ProducedMember<Expectation, Producer, Key>
++}
++
++interface NoOutMessage {
++  readonly OutMessage?: never
++}
++
++interface NoDefaultView {
++  readonly [DefaultViewTypeId]?: never
++}
++
++/**
++ * A completed Block with an OutMessage Schema and a default view, published by
++ * a Definition's `produceBlock`. `owner`, `Model`, and `OutMessage` come from
++ * the Definition, so reading them does not type the producer. Every other
++ * member is the producer's completed Block member, typed when first read.
++ */
+ export interface ProducedBlockWithViewAndOutMessage<
+-  ModelSchema extends Schema.Codec<any, any, any, any>,
++  OwnerValue extends Owner<string>,
++  ModelSchema extends AnySchema,
++  OutMessageSchema extends AnySchema,
+   Producer,
+-> extends ProducedBlockFields<ModelSchema, Producer> {
+-  readonly OutMessage: ProducedMember<Producer, 'OutMessage'>
+-  readonly [DefaultViewTypeId]: ProducedMember<Producer, typeof DefaultViewTypeId>
++> extends ProducerMembers<
++  ProducerExpectation<OwnerValue, ModelSchema, OutMessageSchema, 'View'>,
++  Producer
++> {
++  /** @internal Runtime identity bridge used while lowering child bindings. */
++  readonly owner: OwnerValue
++  /** Schema for this Block's Model. */
++  readonly Model: ModelSchema
++  /** Schema for facts this Block reports to its parent. */
++  readonly OutMessage: OutMessageSchema
++  readonly [DefaultViewTypeId]: ProducedMember<
++    ProducerExpectation<OwnerValue, ModelSchema, OutMessageSchema, 'View'>,
++    Producer,
++    typeof DefaultViewTypeId
++  >
+ }
+ 
+-/** Retains an independent Model Schema and a producer's exact completed view capabilities. */
++/**
++ * A completed Block with a default view and no OutMessage Schema, published by
++ * a Definition's `produceBlock`. `owner` and `Model` come from the Definition,
++ * so reading them does not type the producer. Every other member is the
++ * producer's completed Block member, typed when first read.
++ */
+ export interface ProducedBlockWithView<
+-  ModelSchema extends Schema.Codec<any, any, any, any>,
++  OwnerValue extends Owner<string>,
++  ModelSchema extends AnySchema,
+   Producer,
+-> extends ProducedBlockFields<ModelSchema, Producer> {
+-  readonly OutMessage?: never
+-  readonly [DefaultViewTypeId]: ProducedMember<Producer, typeof DefaultViewTypeId>
++>
++  extends
++    ProducerMembers<
++      ProducerExpectation<OwnerValue, ModelSchema, undefined, 'View'>,
++      Producer
++    >,
++    NoOutMessage {
++  /** @internal Runtime identity bridge used while lowering child bindings. */
++  readonly owner: OwnerValue
++  /** Schema for this Block's Model. */
++  readonly Model: ModelSchema
++  readonly [DefaultViewTypeId]: ProducedMember<
++    ProducerExpectation<OwnerValue, ModelSchema, undefined, 'View'>,
++    Producer,
++    typeof DefaultViewTypeId
++  >
+ }
+ 
+-/** Retains an independent Model Schema and a producer's exact completed OutMessage capabilities. */
++/**
++ * A completed Block with an OutMessage Schema and no default view, published
++ * by a Definition's `produceViewlessBlock`. `owner`, `Model`, and `OutMessage`
++ * come from the Definition, so reading them does not type the producer. Every
++ * other member is the producer's completed Block member, typed when first read.
++ */
+ export interface ProducedBlockWithOutMessage<
+-  ModelSchema extends Schema.Codec<any, any, any, any>,
++  OwnerValue extends Owner<string>,
++  ModelSchema extends AnySchema,
++  OutMessageSchema extends AnySchema,
+   Producer,
+-> extends ProducedBlockFields<ModelSchema, Producer> {
+-  readonly OutMessage: ProducedMember<Producer, 'OutMessage'>
+-  readonly [DefaultViewTypeId]?: never
++>
++  extends
++    ProducerMembers<
++      ProducerExpectation<
++        OwnerValue,
++        ModelSchema,
++        OutMessageSchema,
++        'Viewless'
++      >,
++      Producer
++    >,
++    NoDefaultView {
++  /** @internal Runtime identity bridge used while lowering child bindings. */
++  readonly owner: OwnerValue
++  /** Schema for this Block's Model. */
++  readonly Model: ModelSchema
++  /** Schema for facts this Block reports to its parent. */
++  readonly OutMessage: OutMessageSchema
+ }
+ 
+-/** Retains an independent Model Schema and a producer's exact completed capabilities without a view or OutMessage. */
++/**
++ * A completed Block with neither an OutMessage Schema nor a default view,
++ * published by a Definition's `produceViewlessBlock`. `owner` and `Model` come
++ * from the Definition, so reading them does not type the producer. Every other
++ * member is the producer's completed Block member, typed when first read.
++ */
+ export interface ProducedBlockWithoutViewOrOutMessage<
+-  ModelSchema extends Schema.Codec<any, any, any, any>,
++  OwnerValue extends Owner<string>,
++  ModelSchema extends AnySchema,
+   Producer,
+-> extends ProducedBlockFields<ModelSchema, Producer> {
+-  readonly OutMessage?: never
+-  readonly [DefaultViewTypeId]?: never
++>
++  extends
++    ProducerMembers<
++      ProducerExpectation<OwnerValue, ModelSchema, undefined, 'Viewless'>,
++      Producer
++    >,
++    NoOutMessage,
++    NoDefaultView {
++  /** @internal Runtime identity bridge used while lowering child bindings. */
++  readonly owner: OwnerValue
++  /** Schema for this Block's Model. */
++  readonly Model: ModelSchema
+ }
+ 
+-/** The completed Block a Composition's `produceBlock` returns. Its `Model` comes
+- * from the Composition, so reading it does not type the producer. Every other
+- * member is read from the producer's completed Block on demand. */
+-export type ProducedCompositionBlock<
+-  ModelSchema extends Schema.Codec<any, any, any, any>,
+-  OutMessageSchema,
++/** @internal Selects the produced Block shape from the Definition's OutMessage
++ * Schema and the produce method's view presence. It never reads the producer. */
++export type ProducedBlockFor<
++  OwnerValue extends Owner<string>,
++  ModelSchema extends AnySchema,
++  OutMessageSchema extends AnySchema | undefined,
++  View extends ViewPresence,
+   Producer,
+-> = OutMessageSchema extends Schema.Codec<any, any, any, any>
+-  ? ProducedBlockWithViewAndOutMessage<ModelSchema, Producer>
+-  : ProducedBlockWithView<ModelSchema, Producer>
++> = OutMessageSchema extends AnySchema
++  ? View extends 'View'
++    ? ProducedBlockWithViewAndOutMessage<
++        OwnerValue,
++        ModelSchema,
++        OutMessageSchema,
++        Producer
++      >
++    : ProducedBlockWithOutMessage<
++        OwnerValue,
++        ModelSchema,
++        OutMessageSchema,
++        Producer
++      >
++  : View extends 'View'
++    ? ProducedBlockWithView<OwnerValue, ModelSchema, Producer>
++    : ProducedBlockWithoutViewOrOutMessage<OwnerValue, ModelSchema, Producer>
+diff --git a/packages/foldkit/src/block/public.ts b/packages/foldkit/src/block/public.ts
+index a1d46949a..42473420d 100644
+--- a/packages/foldkit/src/block/public.ts
++++ b/packages/foldkit/src/block/public.ts
+@@ -89,7 +89,6 @@ export type {
+   ProducedBlockWithView,
+   ProducedBlockWithViewAndOutMessage,
+   ProducedBlockWithoutViewOrOutMessage,
+-  ProducedCompositionBlock,
+ } from './produced.js'
+ export type { DefineStepFields, DefineStepNoop } from './fieldStep.js'
+ export type { CommandsStep, MakeCommandsStep } from './commandsStep.js'
+-- 
+2.55.0
+

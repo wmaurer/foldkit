@@ -1,0 +1,11 @@
+type level, rejections in rejected.ts (13 expected) and failing message pins in messages.ts (0 expected)
+  unmutated:                    rejections 13, failing pins 0
+  owner comparison removed     : rejections 12, failing pins 2
+  Model comparison removed     : rejections 12, failing pins 1
+  view agreement removed       : rejections 11, failing pins 2
+  OutMessage agreement removed : rejections 12, failing pins 1
+  any check removed            : rejections 13, failing pins 1
+runtime, node runtime.mjs
+  mark comparison removed:      FAILURES: 4
+  view-required check removed:  FAILURES: 1
+  restored:                     ALL AS EXPECTED

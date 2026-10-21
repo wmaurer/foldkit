@@ -1,0 +1,2 @@
+$ pnpm run clean && tsc -b tsconfig.build.json
+$ rimraf dist *.tsbuildinfo

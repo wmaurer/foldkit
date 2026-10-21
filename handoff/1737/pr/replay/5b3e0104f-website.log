@@ -1,0 +1,348 @@
+$ node ../../internal/api-reference-generator/generate.mjs
+[93m[warning][0m The signature Scene.subscriptions has an @param with name "localSubscriptions", which was not used
+[93m[warning][0m HandlerEvidenceOfBlock, defined in foldkit/src/block/requirements.ts, is referenced by Block.Binding but not included in the documentation
+[93m[warning][0m BoundExposedOperations, defined in foldkit/src/block/binding.ts, is referenced by Block.Binding but not included in the documentation
+[93m[warning][0m OptionalParentBindingContract, defined in foldkit/src/block/binding.ts, is referenced by Block.Binding but not included in the documentation
+[93m[warning][0m OutMessageOfProducer, defined in foldkit/src/block/binding.ts, is referenced by Block.BindingReturn but not included in the documentation
+[93m[warning][0m QualifyOwned, defined in foldkit/src/block/scope.ts, is referenced by Block.BindingReturn but not included in the documentation
+[93m[warning][0m BindChildResultForConfig, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindingWithoutOutMessagePolicy but not included in the documentation
+[93m[warning][0m BlockContract, defined in foldkit/src/block/definition.ts, is referenced by Block.Block but not included in the documentation
+[93m[warning][0m NoOutMessage, defined in foldkit/src/block/definition.ts, is referenced by Block.Block but not included in the documentation
+[93m[warning][0m NoDefaultView, defined in foldkit/src/block/definition.ts, is referenced by Block.Block but not included in the documentation
+[93m[warning][0m CompletedImplementationValue, defined in foldkit/src/block/definition.ts, is referenced by Block.Completed but not included in the documentation
+[93m[warning][0m PublicImplementationValue, defined in foldkit/src/block/definition.ts, is referenced by Block.Completed but not included in the documentation
+[93m[warning][0m CompositionDeliveryErrors, defined in foldkit/src/block/delivery.ts, is referenced by Block.DefineCompositionUpdate but not included in the documentation
+[93m[warning][0m ValidDefineCompositionUpdate, defined in foldkit/src/block/delivery.ts, is referenced by Block.DefineCompositionUpdate but not included in the documentation
+[93m[warning][0m ObjectStepFields, defined in foldkit/src/block/fieldStep.ts, is referenced by Block.DefineStepFields but not included in the documentation
+[93m[warning][0m AnySchema, defined in foldkit/src/block/definition.ts, is referenced by Block.Definition but not included in the documentation
+[93m[warning][0m DefinitionViewRequirements, defined in foldkit/src/block/definition.ts, is referenced by Block.DefinitionView but not included in the documentation
+[93m[warning][0m ImplementationChannels, defined in foldkit/src/block/definition.ts, is referenced by Block.Implementation but not included in the documentation
+[93m[warning][0m ExposedMessageOperations, defined in foldkit/src/block/definition.ts, is referenced by Block.Implementation but not included in the documentation
+[93m[warning][0m ChildInitContextPlan, defined in foldkit/src/block/initialization.ts, is referenced by Block.InitializationPlan but not included in the documentation
+[93m[warning][0m HandlerRequirementsOfBinding, defined in foldkit/src/block/binding.ts, is referenced by Block.KeyedBinding but not included in the documentation
+[93m[warning][0m KeyedBoundExposedOperations, defined in foldkit/src/block/keyedBinding.ts, is referenced by Block.KeyedBinding but not included in the documentation
+[93m[warning][0m OwnedSubscriptionEntries, defined in foldkit/src/block/definition.ts, is referenced by Block.OwnedSubscriptionRegistry but not included in the documentation
+[93m[warning][0m MaybeSubscriptionRegistryLayer, defined in foldkit/src/block/definition.ts, is referenced by Block.OwnedSubscriptionRegistry but not included in the documentation
+[93m[warning][0m LocalCapability, defined in foldkit/src/block/scope.ts, is referenced by Block.Qualify but not included in the documentation
+[93m[warning][0m ValidateFullComposition, defined in foldkit/src/block/requirements.ts, is referenced by Block.ValidateConcreteComposition but not included in the documentation
+[93m[warning][0m DefinitionViewMountRequirements, defined in foldkit/src/block/binding.ts, is referenced by Block.ValidateEmbeddedViewMounts but not included in the documentation
+[93m[warning][0m ExtractHandler, defined in foldkit/src/command/handler.ts, is referenced by Command.HandlerOf but not included in the documentation
+[93m[warning][0m ExtractHandler, defined in foldkit/src/managedResource/handler.ts, is referenced by ManagedResource.HandlerOf but not included in the documentation
+[93m[warning][0m PublicProgram, defined in foldkit/src/runtime/program.ts, is referenced by Program.Element but not included in the documentation
+[93m[warning][0m SubscriptionEmissionSource, defined in foldkit/src/test/scene.ts, is referenced by Scene.SceneStep but not included in the documentation
+[93m[warning][0m ExtractHandler, defined in foldkit/src/subscription/handler.ts, is referenced by Subscription.HandlerOf but not included in the documentation
+[93m[warning][0m DeferredUpdateEvidence, defined in foldkit/src/update/update.ts, is referenced by Update.RegistrationEvidenceOf but not included in the documentation
+[93m[warning][0m ConcreteRegistrationPart, defined in foldkit/src/update/update.ts, is referenced by Update.RegistrationEvidenceOf but not included in the documentation
+[93m[warning][0m DirectResultEvidenceChannelOf, defined in foldkit/src/update/update.ts, is referenced by Update.RegistrationEvidenceOf but not included in the documentation
+[93m[warning][0m ReturnOf, defined in foldkit/src/update/update.ts, is referenced by Update.RequirementsOf but not included in the documentation
+[93m[warning][0m NoRegistrationEvidence, defined in foldkit/src/update/update.ts, is referenced by Update.Return but not included in the documentation
+[93m[warning][0m RegistrationModelOf, defined in foldkit/src/update/update.ts, is referenced by Update.WithRegistrationEvidence but not included in the documentation
+[93m[warning][0m RegistrationCommandMessageOf, defined in foldkit/src/update/update.ts, is referenced by Update.WithRegistrationEvidence but not included in the documentation
+[93m[warning][0m RegistrationOutMessageOf, defined in foldkit/src/update/update.ts, is referenced by Update.WithRegistrationEvidence but not included in the documentation
+[93m[warning][0m RegistrationCommandRequirementsOf, defined in foldkit/src/update/update.ts, is referenced by Update.WithRegistrationEvidence but not included in the documentation
+[93m[warning][0m PublicProducer, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock but not included in the documentation
+[93m[warning][0m CheckedImplementationValue, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock but not included in the documentation
+[93m[warning][0m PublicUpdateProducer, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock but not included in the documentation
+[93m[warning][0m PublicExposedProducer, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock but not included in the documentation
+[93m[warning][0m ViewSubscriptionImplementation, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock but not included in the documentation
+[93m[warning][0m ManagedExposedOperationsImplementation, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock but not included in the documentation
+[93m[warning][0m ManagedSubscriptionImplementation, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock but not included in the documentation
+[93m[warning][0m AnySchema, defined in foldkit/src/block/define.ts, is referenced by Block.AuthoringMakeComposition.ModelSchema but not included in the documentation
+[93m[warning][0m AnySchema, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.ParentModelSchema but not included in the documentation
+[93m[warning][0m BindChildConstructorResult, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild but not included in the documentation
+[93m[warning][0m CommandMessageOfCommands, defined in foldkit/src/block/binding.ts, is referenced by Block.BindingInitializer but not included in the documentation
+[93m[warning][0m CommandRequirementsOf, defined in foldkit/src/block/binding.ts, is referenced by Block.BindingInitializer but not included in the documentation
+[93m[warning][0m CompleteEffectsLayer, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedBlockWithOutMessage.EffectsLayer but not included in the documentation
+[93m[warning][0m ImplementationHostHandlers, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedBlockWithOutMessage.hostHandlers but not included in the documentation
+[93m[warning][0m ImplementationManagedResources, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedBlockWithOutMessage.managedResources but not included in the documentation
+[93m[warning][0m ImplementationExposedOperations, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedBlockWithOutMessage.operations but not included in the documentation
+[93m[warning][0m ImplementationSubscriptions, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedBlockWithOutMessage.subscriptions but not included in the documentation
+[93m[warning][0m CompletedWithViewArgument, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedWithView.[DefaultViewTypeId] but not included in the documentation
+[93m[warning][0m OutMessageSchemaOf, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedWithViewAndOutMessage.OutMessage but not included in the documentation
+[93m[warning][0m CommandWithArgs, defined in foldkit/src/block/named.ts, is referenced by Block.DefineCommand but not included in the documentation
+[93m[warning][0m CommandNoArgs, defined in foldkit/src/block/named.ts, is referenced by Block.DefineCommand but not included in the documentation
+[93m[warning][0m DeferredStepMessage, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineStep but not included in the documentation
+[93m[warning][0m OutMessageOfReturn, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineStep but not included in the documentation
+[93m[warning][0m DeferredStepReturn, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineStep but not included in the documentation
+[93m[warning][0m GraphRequirementOf, defined in foldkit/src/update/update.ts, is referenced by Block.DefineStep but not included in the documentation
+[93m[warning][0m AnyFunction, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineStep but not included in the documentation
+[93m[warning][0m DeferredStepKind, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineStep but not included in the documentation
+[93m[warning][0m ResultEvidenceChannelOf, defined in foldkit/src/update/update.ts, is referenced by Block.DefineStep but not included in the documentation
+[93m[warning][0m ChildOutMessage, defined in foldkit/src/block/outMessageFold.ts, is referenced by Block.MakeOutMessageFold but not included in the documentation
+[93m[warning][0m DefinedCaseSteps, defined in foldkit/src/block/outMessageFold.ts, is referenced by Block.MakeOutMessageFold but not included in the documentation
+[93m[warning][0m OutMessageFoldContext, defined in foldkit/src/block/outMessageFold.ts, is referenced by Block.MakeOutMessageFold but not included in the documentation
+[93m[warning][0m ChildOutMessage, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward but not included in the documentation
+[93m[warning][0m AnyResultRecipe, defined in foldkit/src/update/update.ts, is referenced by Block.OutMessageFoldStep but not included in the documentation
+[93m[warning][0m EmittedMessage, defined in foldkit/src/block/definition.ts, is referenced by Block.OwnedSubscriptionEntryBuilder but not included in the documentation
+[93m[warning][0m ProducedMember, defined in foldkit/src/block/produced.ts, is referenced by Block.ProducedBlockWithOutMessage.bindings but not included in the documentation
+[93m[warning][0m ProducerExpectation, defined in foldkit/src/block/produced.ts, is referenced by Block.ProducedBlockWithOutMessage.EffectsLayer but not included in the documentation
+[93m[warning][0m AnySchema, defined in foldkit/src/block/produced.ts, is referenced by Block.ProducedBlockWithOutMessage.ModelSchema but not included in the documentation
+[93m[warning][0m DefaultViewTypeId, defined in foldkit/src/block/defaultView.ts, is referenced by Block.ProducedBlockWithView.[DefaultViewTypeId] but not included in the documentation
+[93m[warning][0m BindableBlock, defined in foldkit/src/block/binding.ts, is referenced by Block.WithOutMessagePolicy.BlockValue but not included in the documentation
+[93m[warning][0m KeyedQueryBlockBase, defined in foldkit/src/experimental/query/keyedQuery.ts, is referenced by Experimental.Query.KeyedQuery but not included in the documentation
+[93m[warning][0m KeyedQueryConveniences, defined in foldkit/src/experimental/query/keyedQuery.ts, is referenced by Experimental.Query.KeyedQuery but not included in the documentation
+[93m[warning][0m QueryBlockBase, defined in foldkit/src/experimental/query/query.ts, is referenced by Experimental.Query.Query but not included in the documentation
+[93m[warning][0m QueryConveniences, defined in foldkit/src/experimental/query/query.ts, is referenced by Experimental.Query.Query but not included in the documentation
+[93m[warning][0m ValidateServerInit, defined in foldkit/src/experimental/server/server.ts, is referenced by Experimental.Server.ApplicationConfig but not included in the documentation
+[93m[warning][0m VNodeData, defined in foldkit/src/snabbdom/vnode.ts, is referenced by Html.VNode.data but not included in the documentation
+[93m[warning][0m Props, defined in foldkit/src/snabbdom/props.ts, is referenced by Html.VNode.data but not included in the documentation
+[93m[warning][0m TaggedUnionMatch, defined in foldkit/src/schema/index.ts, is referenced by Navigation.UrlRequestSchema.match but not included in the documentation
+[93m[warning][0m TaggedUnionMatchOrElse, defined in foldkit/src/schema/index.ts, is referenced by Navigation.UrlRequestSchema.matchOrElse but not included in the documentation
+[93m[warning][0m TaggedUnionMember, defined in foldkit/src/schema/index.ts, is referenced by Navigation.UrlRequestSchema.members but not included in the documentation
+[93m[warning][0m RootPorts, defined in foldkit/src/runtime/program.ts, is referenced by Program.make but not included in the documentation
+[93m[warning][0m RootFlags, defined in foldkit/src/runtime/program.ts, is referenced by Program.make but not included in the documentation
+[93m[warning][0m ProgramRequirements, defined in foldkit/src/runtime/program.ts, is referenced by Program.make but not included in the documentation
+[93m[warning][0m RuntimeServicesOfBlock, defined in foldkit/src/block/requirements.ts, is referenced by Program.make but not included in the documentation
+[93m[warning][0m FlagsRequirements, defined in foldkit/src/runtime/program.ts, is referenced by Program.makeElement but not included in the documentation
+[93m[warning][0m ChildrenOf, defined in foldkit/src/test/scene.ts, is referenced by Scene.subscriptions but not included in the documentation
+[93m[warning][0m OutMessageOf, defined in foldkit/src/update/update.ts, is referenced by Update.define but not included in the documentation
+[93m[warning][0m ExactImplementationKeys, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m IsConcreteOwner, defined in foldkit/src/block/owner.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m ValidateLocalComposition, defined in foldkit/src/block/requirements.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m ValidateBindingOperationNames, defined in foldkit/src/block/binding.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m ValidateExposedOperations, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m AuthoredMessage, defined in foldkit/src/block/delivery.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m ValidateDefinitionView, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m ValidateInit, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m AssembleBlockComposition, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock.CompositionValue but not included in the documentation
+[93m[warning][0m ValidateAssembleBlockComposition, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock.implementation but not included in the documentation
+[93m[warning][0m CompositionDeliveryArguments, defined in foldkit/src/block/delivery.ts, is referenced by Block.AuthoringMakeComposition.validation but not included in the documentation
+[93m[warning][0m ValidateChildInitContext, defined in foldkit/src/block/initialization.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m InvalidPolicies, defined in foldkit/src/block/policyEvidence.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m RegistrationsOfPolicies, defined in foldkit/src/block/policyEvidence.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m ValidateUniqueChildPlacements, defined in foldkit/src/block/requirements.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m ValidateUniqueInitialFields, defined in foldkit/src/block/initialization.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m ValidateCompositionDelivery, defined in foldkit/src/block/delivery.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m InvalidChildParentModels, defined in foldkit/src/block/definition.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m InvalidChildCommandMessages, defined in foldkit/src/block/definition.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m InvalidChildOutMessages, defined in foldkit/src/block/definition.ts, is referenced by Block.AuthoringMakeComposition.config but not included in the documentation
+[93m[warning][0m BindChildContextualProperties, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.config but not included in the documentation
+[93m[warning][0m GeneratedDeliveryRequirement, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.config but not included in the documentation
+[93m[warning][0m KeyForConfig, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.config but not included in the documentation
+[93m[warning][0m ValidateStaticBindingConfigWithoutPolicy, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.validation but not included in the documentation
+[93m[warning][0m ValidateConcreteCompositionArguments, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.validation but not included in the documentation
+[93m[warning][0m BindChildConfigKey, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.Keys but not included in the documentation
+[93m[warning][0m GeneralKeyedContextualProperties, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.config but not included in the documentation
+[93m[warning][0m ValidateBindChildConfigKeys, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.validation but not included in the documentation
+[93m[warning][0m GeneralKeyedConfigKey, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.Keys but not included in the documentation
+[93m[warning][0m ValidateConcreteInitializedModel, defined in foldkit/src/block/binding.ts, is referenced by Block.BindingInitializer.config but not included in the documentation
+[93m[warning][0m ValidateConcreteParentCommands, defined in foldkit/src/block/binding.ts, is referenced by Block.BindingInitializer.config but not included in the documentation
+[93m[warning][0m ValidateParentCommandMessages, defined in foldkit/src/block/binding.ts, is referenced by Block.BindingInitializer.config but not included in the documentation
+[93m[warning][0m MessageOfInitializerSource, defined in foldkit/src/block/binding.ts, is referenced by Block.BindingInitializer.config but not included in the documentation
+[93m[warning][0m ValidateSingleInitSignature, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.Validation but not included in the documentation
+[93m[warning][0m ValidateInitializationFields, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.Validation but not included in the documentation
+[93m[warning][0m ValidateInitializationEvidence, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.Validation but not included in the documentation
+[93m[warning][0m ValidateInitializationOutMessage, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.Validation but not included in the documentation
+[93m[warning][0m LocalName, defined in foldkit/src/block/named.ts, is referenced by Block.DefineCommand.name but not included in the documentation
+[93m[warning][0m ValidateDeferredStepOutput, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineStep.step but not included in the documentation
+[93m[warning][0m ValidateAnnotatedContext, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineStep.step but not included in the documentation
+[93m[warning][0m AnyBindingInitRecipe, defined in foldkit/src/block/initRecipe.ts, is referenced by Block.DefineStep.Output but not included in the documentation
+[93m[warning][0m ValidateConcreteResultEvidence, defined in foldkit/src/update/update.ts, is referenced by Block.MakeCommandsStep.commands but not included in the documentation
+[93m[warning][0m ValidateChild, defined in foldkit/src/block/outMessageFold.ts, is referenced by Block.MakeOutMessageFold.child but not included in the documentation
+[93m[warning][0m OutMessageFoldCases, defined in foldkit/src/block/outMessageFold.ts, is referenced by Block.MakeOutMessageFold.cases but not included in the documentation
+[93m[warning][0m CaseValidation, defined in foldkit/src/block/outMessageFold.ts, is referenced by Block.MakeOutMessageFold.cases but not included in the documentation
+[93m[warning][0m ChildOutMessageContract, defined in foldkit/src/block/outMessageFold.ts, is referenced by Block.MakeOutMessageFold.Child but not included in the documentation
+[93m[warning][0m IsAny, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward.cases but not included in the documentation
+[93m[warning][0m IsUnknown, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward.cases but not included in the documentation
+[93m[warning][0m OutMessageTag, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward.cases but not included in the documentation
+[93m[warning][0m CaseValidation, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward.cases but not included in the documentation
+[93m[warning][0m ValidateForwardedCases, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward.validation but not included in the documentation
+[93m[warning][0m OutMessageForwardCases, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward.Cases but not included in the documentation
+[93m[warning][0m ValidateChild, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward.child but not included in the documentation
+[93m[warning][0m ChildOutMessageContract, defined in foldkit/src/block/outMessageForward.ts, is referenced by Block.MakeOutMessageForward.Child but not included in the documentation
+[93m[warning][0m GraphInput, defined in foldkit/src/update/update.ts, is referenced by Block.OutMessageFoldStep.model but not included in the documentation
+[93m[warning][0m ContextualOutMessagePolicy, defined in foldkit/src/block/bindChild.ts, is referenced by Block.WithOutMessagePolicy.policy but not included in the documentation
+[93m[warning][0m OutMessagePolicyForBindingConfig, defined in foldkit/src/block/bindChild.ts, is referenced by Block.WithOutMessagePolicy.policy but not included in the documentation
+[93m[warning][0m ValidateOutMessageHelperPolicy, defined in foldkit/src/block/bindChild.ts, is referenced by Block.WithOutMessagePolicy.policy but not included in the documentation
+[93m[warning][0m ConnectionEvidence, defined in foldkit/src/block/binding.ts, is referenced by Block.AnyBinding.__type.[ConnectionEvidenceTypeId] but not included in the documentation
+[93m[warning][0m AnyLayer, defined in foldkit/src/block/definition.ts, is referenced by Block.AnyBlock.__type.[LocalEffectsLayerTypeId] but not included in the documentation
+[93m[warning][0m AnyManagedResources, defined in foldkit/src/block/definition.ts, is referenced by Block.AnyBlock.__type.managedResources but not included in the documentation
+[93m[warning][0m AnySubscriptions, defined in foldkit/src/block/definition.ts, is referenced by Block.AnyBlock.__type.subscriptions but not included in the documentation
+[93m[warning][0m DispatchSchemaFor, defined in foldkit/src/block/childEnvelope.ts, is referenced by Block.Composition.__type.assembleBlock but not included in the documentation
+[93m[warning][0m IsAny, defined in foldkit/src/block/definition.ts, is referenced by Block.DefinedStep.__type but not included in the documentation
+[93m[warning][0m DefinedUpdateReturn, defined in foldkit/src/block/definition.ts, is referenced by Block.DefinedUpdate.__type but not included in the documentation
+[93m[warning][0m ParentOwnedModel, defined in foldkit/src/block/initialization.ts, is referenced by Block.InitializationPlan.__type.model but not included in the documentation
+[93m[warning][0m KeyedEmbed, defined in foldkit/src/block/keyedBinding.ts, is referenced by Block.KeyedBinding.__type.embedView but not included in the documentation
+[93m[warning][0m ValidateConstructionRequirements, defined in foldkit/src/block/scope.ts, is referenced by Command.ToLayer.build but not included in the documentation
+[93m[warning][0m CollectionMetadata, defined in foldkit/src/command/index.ts, is referenced by Command.mapMessages.__type but not included in the documentation
+[93m[warning][0m AnyLayer, defined in foldkit/src/experimental/query/keyedQuery.ts, is referenced by Experimental.Query.KeyedQuery.EffectsLayer but not included in the documentation
+[93m[warning][0m KeyedQueryFetchDefinition, defined in foldkit/src/experimental/query/keyedQuery.ts, is referenced by Experimental.Query.KeyedQuery.HostHandlers but not included in the documentation
+[93m[warning][0m AnyLayer, defined in foldkit/src/experimental/query/query.ts, is referenced by Experimental.Query.Query.EffectsLayer but not included in the documentation
+[93m[warning][0m QueryFetchDefinition, defined in foldkit/src/experimental/query/query.ts, is referenced by Experimental.Query.Query.HostHandlers but not included in the documentation
+[93m[warning][0m PageWithoutRoutingModeFields, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.config but not included in the documentation
+[93m[warning][0m ValidateProgramBlock, defined in foldkit/src/runtime/programRoot.ts, is referenced by Program.make.config but not included in the documentation
+[93m[warning][0m ExactPageHostConfig, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.config but not included in the documentation
+[93m[warning][0m AnyFlagsSchema, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.FlagsSchema but not included in the documentation
+[93m[warning][0m PageWithRoutingModeFields, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.config but not included in the documentation
+[93m[warning][0m ElementWithoutFlagsModeFields, defined in foldkit/src/runtime/program.ts, is referenced by Program.makeElement.config but not included in the documentation
+[93m[warning][0m ExactElementHostConfig, defined in foldkit/src/runtime/program.ts, is referenced by Program.makeElement.config but not included in the documentation
+[93m[warning][0m ElementWithFlagsModeFields, defined in foldkit/src/runtime/program.ts, is referenced by Program.makeElement.config but not included in the documentation
+[93m[warning][0m MakeRuntimeReturn, defined in foldkit/src/runtime/runtime.ts, is referenced by Runtime.embed.program but not included in the documentation
+[93m[warning][0m RegisteredSubscriptions, defined in foldkit/src/test/scene.ts, is referenced by Scene.subscriptions.LocalSubscriptions but not included in the documentation
+[93m[warning][0m ModelSchemaOf, defined in foldkit/src/test/scene.ts, is referenced by Scene.subscriptions.LocalSubscriptions but not included in the documentation
+[93m[warning][0m MessageSchemaOf, defined in foldkit/src/test/scene.ts, is referenced by Scene.subscriptions.LocalSubscriptions but not included in the documentation
+[93m[warning][0m AnySubscriptions, defined in foldkit/src/subscription/subscription.ts, is referenced by Subscription.lift.Subscriptions but not included in the documentation
+[93m[warning][0m CombinedStepRecipe, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type but not included in the documentation
+[93m[warning][0m GraphCapabilityModel, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type but not included in the documentation
+[93m[warning][0m CombinedStepRegistrationEvidence, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type but not included in the documentation
+[93m[warning][0m CommonOperationSteps, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type but not included in the documentation
+[93m[warning][0m ResolvedStepReturn, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type but not included in the documentation
+[93m[warning][0m GraphModelOf, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type but not included in the documentation
+[93m[warning][0m InitFoldRegistrationEvidence, defined in foldkit/src/update/update.ts, is referenced by Update.foldChildInit.__type but not included in the documentation
+[93m[warning][0m InitRegistrationEvidence, defined in foldkit/src/update/update.ts, is referenced by Update.foldChildInits.__type but not included in the documentation
+[93m[warning][0m WithOutMessageOutput, defined in foldkit/src/update/update.ts, is referenced by Update.withOutMessage.__type but not included in the documentation
+[93m[warning][0m MergeLayers, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedBlockWithOutMessage.provideHandlers.__type but not included in the documentation
+[93m[warning][0m InitialRegistration, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.__type but not included in the documentation
+[93m[warning][0m ResolvedInitializationOutput, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.__type but not included in the documentation
+[93m[warning][0m StepReturnOf, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.__type but not included in the documentation
+[93m[warning][0m InitializedModel, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.__type but not included in the documentation
+[93m[warning][0m InitialRequirements, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.__type but not included in the documentation
+[93m[warning][0m CommandsOf, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.__type but not included in the documentation
+[93m[warning][0m TaggedUnionSubsetMembers, defined in foldkit/src/schema/index.ts, is referenced by Navigation.UrlRequestSchema.subset.__type but not included in the documentation
+[93m[warning][0m StepsForModel, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type.steps but not included in the documentation
+[93m[warning][0m ResultRecipeModel, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type.steps but not included in the documentation
+[93m[warning][0m ResultRecipeOfStep, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type.steps but not included in the documentation
+[93m[warning][0m RequireOperationStep, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type.steps but not included in the documentation
+[93m[warning][0m StepsWithoutOutMessage, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type.steps but not included in the documentation
+[93m[warning][0m StepsFromReturns, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type.steps but not included in the documentation
+[93m[warning][0m WithOutMessageInput, defined in foldkit/src/update/update.ts, is referenced by Update.withOutMessage.__type.Input but not included in the documentation
+[93m[warning][0m InferredExposedMessageOperations, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock.ImplementationValue.__type.operations but not included in the documentation
+[93m[warning][0m ValidateProvidedHandlers, defined in foldkit/src/block/definition.ts, is referenced by Block.CompletedBlockWithOutMessage.provideHandlers.__type.HandlersLayer but not included in the documentation
+[93m[warning][0m ValidateDefinitionComposition, defined in foldkit/src/block/requirements.ts, is referenced by Block.CompletedBlockWithOutMessage.replaceEffectsLayer.__type.EffectsLayer but not included in the documentation
+[93m[warning][0m FunctionArguments, defined in foldkit/src/block/initialization.ts, is referenced by Block.CompositionInit.__type.args but not included in the documentation
+[93m[warning][0m ValidateHandlerConstruction, defined in foldkit/src/block/named.ts, is referenced by Block.DefineCommand.config.__type.handler but not included in the documentation
+[93m[warning][0m ValidateOwnedMessages, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineCommand.config.__type.messages but not included in the documentation
+[93m[warning][0m ViewWithInputs, defined in foldkit/src/block/definition.ts, is referenced by Block.DefineView.withInputs.__type.view but not included in the documentation
+[93m[warning][0m ValidateHandlerConstruction, defined in foldkit/src/block/definition.ts, is referenced by Block.OwnedManagedResourceEntryBuilder.config.__type.handler but not included in the documentation
+[93m[warning][0m ProducedBlockFor, defined in foldkit/src/block/produced.ts, is referenced by Block.AuthoringDefinition.__type.produceBlock.__type but not included in the documentation
+[93m[warning][0m BindingOperationRecipe, defined in foldkit/src/block/binding.ts, is referenced by Block.Binding.__type.fold.__type but not included in the documentation
+[93m[warning][0m BlockId, defined in foldkit/src/block/binding.ts, is referenced by Block.Binding.__type.fold.__type but not included in the documentation
+[93m[warning][0m BlockId, defined in foldkit/src/block/keyedBinding.ts, is referenced by Block.KeyedBinding.__type.fold.__type but not included in the documentation
+[93m[warning][0m OutMessagePolicyStep, defined in foldkit/src/block/binding.ts, is referenced by Block.OutMessagePolicy.__type.fold.__type but not included in the documentation
+[93m[warning][0m ValidateHandlerConstruction, defined in foldkit/src/command/index.ts, is referenced by Command.define.config.__type.handler but not included in the documentation
+[93m[warning][0m ValidateHandlerConstruction, defined in foldkit/src/mount/index.ts, is referenced by Mount.define.config.__type.handler but not included in the documentation
+[93m[warning][0m BlockModel, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.config.__type.slow but not included in the documentation
+[93m[warning][0m BlockMessage, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.config.__type.slow but not included in the documentation
+[93m[warning][0m RoutingUrlConstructor, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.config.__type.onUrlChange but not included in the documentation
+[93m[warning][0m MessageAcceptedByEveryBlock, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.config.__type.onUrlChange but not included in the documentation
+[93m[warning][0m RoutingRequestConstructor, defined in foldkit/src/runtime/program.ts, is referenced by Program.make.config.__type.onUrlRequest but not included in the documentation
+[93m[warning][0m ConcreteGraphRequirement, defined in foldkit/src/update/update.ts, is referenced by Update.GraphCapability.[GraphCapabilityTypeId].__type.requirement but not included in the documentation
+[93m[warning][0m OwnedReturn, defined in foldkit/src/block/definition.ts, is referenced by Block.AssembleBlock.ImplementationValue.__type.init but not included in the documentation
+[93m[warning][0m ItemOfReadAll, defined in foldkit/src/block/bindChild.ts, is referenced by Block.BindChild.config.__type.item but not included in the documentation
+[93m[warning][0m MergeLayers, defined in foldkit/src/experimental/query/keyedQuery.ts, is referenced by Experimental.Query.KeyedQuery.__type.provideHandlers.__type but not included in the documentation
+[93m[warning][0m MergeLayers, defined in foldkit/src/experimental/query/query.ts, is referenced by Experimental.Query.Query.__type.provideHandlers.__type but not included in the documentation
+[93m[warning][0m ServerFlagsSchema, defined in foldkit/src/experimental/server/server.ts, is referenced by Experimental.Server.renderToString.Config.__type.Flags but not included in the documentation
+[93m[warning][0m AnyBoundBlockConfig, defined in foldkit/src/html/index.ts, is referenced by Html.HtmlBuilder.__type.block.__type.Config but not included in the documentation
+[93m[warning][0m TestHtmlBuilder, defined in foldkit/src/test/scene.ts, is referenced by Scene.withViewInputs.view.__type.h but not included in the documentation
+[93m[warning][0m ReturnValue, defined in foldkit/src/update/update.ts, is referenced by Update.combineSteps.__type.Steps.__type but not included in the documentation
+[93m[warning][0m MountRuntimeInput, defined in foldkit/src/block/named.ts, is referenced by Block.DefineMount.config.__type.handler.__type.__type.input but not included in the documentation
+[93m[warning][0m ReturnWithOutMessageValue, defined in foldkit/src/update/update.ts, is referenced by Update.foldChildInit.__type.childFold.__type.foldOutMessage.__type.__type but not included in the documentation
+[93m[warning][0m The following symbols were marked as intentionally not exported, but were either not referenced in the documentation, or were exported:
+	AnyMountHandler
+	AnyBlockView
+	ApplicationConfigInput
+	ApplicationConfigWithFlagsInput
+	BaseApplicationConfig
+	BaseElementConfig
+	CombinedStepMessage
+	CombinedStepRequirements
+	ConfigPorts
+	ConfigRequirements
+	DefinedStep
+	DefinedUpdate
+	DispatchSync
+	ElementConfigInput
+	ElementConfigWithFlagsInput
+	FirstStepModel
+	FlagsSchemaConfig
+	InferableBlockView
+	InferredBlockView
+	InitReturn
+	KeyedArgs
+	KeyedQueryMessage
+	KeyedQueryModel
+	LiftKeyedQuery
+	LiftQuery
+	ManagedResourceRuntimeServices
+	MountRenderOwner
+	PendingApplication
+	Program
+	QueryMessage
+	QueryModel
+	RoutingApplicationConfigInput
+	RoutingApplicationConfigWithFlagsInput
+	VNode
+	ValidInferredBlockView
+	ValidUpdate
+	ValidateCombinedSteps
+	src/runtime/makeApplication.ts:SelfContainedConfig
+	src/runtime/makeApplication.ts:SelfContainedUpdate
+	src/runtime/makeElement.ts:SelfContainedConfig
+	src/runtime/makeElement.ts:SelfContainedUpdate
+	src/block/binding.ts:AggregatedChildren
+	src/block/binding.ts:AnyBinding
+	src/block/definition.ts:CompositionForValidation
+	src/block/definition.ts:ValidViewInputs
+	src/block/definition.ts:ValidateChildBindings
+	src/block/requirements.ts:HandlerContracts
+	src/block/requirements.ts:ValidateComposition
+	src/block/requirements.ts:ValidateMissingHostHandlers
+	src/block/requirements.ts:ValidatePreciseRequirements
+	src/block/requirements.ts:ValidateUnexpectedHostHandlers
+[93m[warning][0m The comment for Message.CallableTaggedStruct.make links to "BottomWithoutNew.makeOption" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.makeOption": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Message.CallableTaggedStruct.make links to "BottomWithoutNew.makeEffect" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.makeEffect": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Message.CallableTaggedStruct.makeOption links to "BottomWithoutNew.make" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.make": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Message.CallableTaggedStruct.makeOption links to "BottomWithoutNew.makeEffect" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.makeEffect": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Message.CallableTaggedStruct.makeEffect links to "BottomWithoutNew.make" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.make": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Message.CallableTaggedStruct.makeEffect links to "withConstructorDefault" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "withConstructorDefault": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Message.CallableTaggedStruct.makeEffect links to "BottomWithoutNew.make" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.make": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Message.CallableTaggedStruct.makeEffect links to "BottomWithoutNew.makeOption" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.makeOption": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Navigation.UrlRequestSchema.make links to "BottomWithoutNew.makeOption" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.makeOption": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Navigation.UrlRequestSchema.make links to "BottomWithoutNew.makeEffect" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.makeEffect": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Navigation.UrlRequestSchema.makeOption links to "BottomWithoutNew.make" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.make": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Navigation.UrlRequestSchema.makeOption links to "BottomWithoutNew.makeEffect" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.makeEffect": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Navigation.UrlRequestSchema.makeEffect links to "BottomWithoutNew.make" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.make": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Navigation.UrlRequestSchema.makeEffect links to "withConstructorDefault" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "withConstructorDefault": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Navigation.UrlRequestSchema.makeEffect links to "BottomWithoutNew.make" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.make": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Navigation.UrlRequestSchema.makeEffect links to "BottomWithoutNew.makeOption" which was resolved but is not included in the documentation. To fix this warning export it or add { "effect": { "BottomWithoutNew.makeOption": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Block.AnyBlockView links to "BlockConfig" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "BlockConfig": "#" }} to the externalSymbolLinkMappings option
+[96m[info][0m json generated at /tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-pr/packages/website/src/generated/api.json
+[93m[warning][0m Found 0 errors and 256 warnings
+[93m[warning][0m DatePickerComposition, defined in @foldkit/ui/src/datePicker/block.ts, is referenced by Ui.DatePickerBlock but not included in the documentation
+[93m[warning][0m implementation, defined in @foldkit/ui/src/datePicker/block.ts, is referenced by Ui.DatePickerBlock but not included in the documentation
+[93m[warning][0m DialogComposition, defined in @foldkit/ui/src/dialog/block.ts, is referenced by Ui.DialogBlock but not included in the documentation
+[93m[warning][0m implementation, defined in @foldkit/ui/src/dialog/block.ts, is referenced by Ui.DialogBlock but not included in the documentation
+[93m[warning][0m PopoverComposition, defined in @foldkit/ui/src/popover/block.ts, is referenced by Ui.PopoverBlock but not included in the documentation
+[93m[warning][0m implementation, defined in @foldkit/ui/src/popover/block.ts, is referenced by Ui.PopoverBlock but not included in the documentation
+[93m[warning][0m OutMessageSchema, defined in @foldkit/ui/src/combobox/shared.ts, is referenced by Ui.Combobox.Completed.[DefaultViewTypeId] but not included in the documentation
+[93m[warning][0m MessageSchema, defined in @foldkit/ui/src/combobox/shared.ts, is referenced by Ui.Combobox.Completed.Message but not included in the documentation
+[93m[warning][0m BindingSelection, defined in @foldkit/ui/src/dragAndDrop/test.ts, is referenced by Ui.DragAndDrop.test.ResolveKeyboardMoveInput but not included in the documentation
+[93m[warning][0m OutMessageSchema, defined in @foldkit/ui/src/listbox/shared.ts, is referenced by Ui.Listbox.Completed.[DefaultViewTypeId] but not included in the documentation
+[93m[warning][0m ItemSchema, defined in @foldkit/ui/src/combobox/shared.ts, is referenced by Ui.Combobox.create.Item but not included in the documentation
+[93m[warning][0m mounts, defined in @foldkit/ui/src/dialog/block.ts, is referenced by Ui.Dialog.RenderInfo.__type.dialog but not included in the documentation
+[93m[warning][0m DragAndDropBinding, defined in @foldkit/ui/src/dragAndDrop/test.ts, is referenced by Ui.DragAndDrop.test.ResolveKeyboardMoveInput.BindingValue but not included in the documentation
+[93m[warning][0m StoryTransform, defined in @foldkit/ui/src/dragAndDrop/test.ts, is referenced by Ui.DragAndDrop.test.resolveKeyboardMove but not included in the documentation
+[93m[warning][0m PanelMount, defined in @foldkit/ui/src/tabs/tabs.ts, is referenced by Ui.Tabs.ViewInputs.__type.panelMount but not included in the documentation
+[93m[warning][0m mounts, defined in @foldkit/ui/src/tooltip/block.ts, is referenced by Ui.Tooltip.RenderInfo.__type.panel but not included in the documentation
+[93m[warning][0m OutMessage, defined in @foldkit/ui/src/combobox/shared.ts, is referenced by Ui.Combobox.Completed.update.__type but not included in the documentation
+[93m[warning][0m OutMessage, defined in @foldkit/ui/src/menu/menu.ts, is referenced by Ui.Menu.Completed.update.__type but not included in the documentation
+[93m[warning][0m DrainEntry, defined in @foldkit/ui/src/toast/test.ts, is referenced by Ui.Toast.Completed.test.__type.drainEntry but not included in the documentation
+[93m[warning][0m The following symbols were marked as intentionally not exported, but were either not referenced in the documentation, or were exported:
+	BundleUpdateReturn
+	FoldAnimationStep
+	UpdateReturn
+	ViewForItem
+	src/animation/update.ts:UpdateRequirements
+	src/radioGroup/index.ts:update
+	src/tabs/index.ts:update
+[93m[warning][0m The comment for Ui.AnimationBlock.__type.view.__type.attributes.__type.__childAttribute links to "childAttributes" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "childAttributes": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Ui.Menu.Completed.[DefaultViewTypeId].__type.buttonAttributes.__type.__childAttribute links to "childAttributes" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "childAttributes": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Ui.Menu.Completed.[DefaultViewTypeId].__type.itemsAttributes.__type.__childAttribute links to "childAttributes" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "childAttributes": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Ui.Menu.Completed.[DefaultViewTypeId].__type.itemsScrollAttributes.__type.__childAttribute links to "childAttributes" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "childAttributes": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Ui.Menu.Completed.[DefaultViewTypeId].__type.backdropAttributes.__type.__childAttribute links to "childAttributes" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "childAttributes": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Ui.Menu.Completed.[DefaultViewTypeId].__type.attributes.__type.__childAttribute links to "childAttributes" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "childAttributes": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Ui.Menu.Completed.[DefaultViewTypeId].__type.groupAttributes.__type.__childAttribute links to "childAttributes" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "childAttributes": "#" }} to the externalSymbolLinkMappings option
+[93m[warning][0m The comment for Ui.Menu.Completed.[DefaultViewTypeId].__type.separatorAttributes.__type.__childAttribute links to "childAttributes" which was resolved but is not included in the documentation. To fix this warning export it or add { "foldkit": { "childAttributes": "#" }} to the externalSymbolLinkMappings option
+[96m[info][0m json generated at /tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-pr/packages/website/src/generated/api-ui.json
+[93m[warning][0m Found 0 errors and 28 warnings
+$ tsc --noEmit

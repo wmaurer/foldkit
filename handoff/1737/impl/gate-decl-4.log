@@ -1,0 +1,8 @@
+$ pnpm --filter foldkit --filter @foldkit/ui check:emitted-declarations
+Scope: 2 of 53 workspace projects
+packages/foldkit check:emitted-declarations$ node scripts/check-emitted-declarations.ts
+packages/foldkit check:emitted-declarations: [emitted-declarations] Version 7.0.2; external emission, rejected wiring, relocation, native completion and inferred configuration documentation checks passed.
+packages/foldkit check:emitted-declarations: Done
+packages/ui check:emitted-declarations$ node scripts/check-emitted-declarations.ts
+packages/ui check:emitted-declarations: [ui-emitted-declarations] Version 7.0.2; isolated package build, external emission, rejected wiring, and relocation checks passed.
+packages/ui check:emitted-declarations: Done

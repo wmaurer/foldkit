@@ -1,0 +1,819 @@
+From 455235ca0ec06bc35a099ca1f9ec7ee1943299a9 Mon Sep 17 00:00:00 2001
+From: Wayne Maurer <wmaurer@users.noreply.github.com>
+Date: Wed, 21 Oct 2026 15:12:50 +0200
+Subject: [PATCH 4/8] test(foldkit): check produced Block declarations
+
+The produced-block entry compares each produced shape with its assembled
+Block: the key set and every member for the four completed shapes and
+for replaceEffectsLayer and provideHandlers results, Block.AnyBlock,
+embedView with and without a default view, and a Program root. It also
+asserts the reason each invalid producer reports, and the rejected file
+binds each invalid produced Block once.
+
+Checks can now require text in their emitted declarations. The
+produced-block entry requires that an exported produced Block is still
+written as ProducedBlockWithView over its named producer, so emission
+keeps the producer unresolved.
+---
+ .../declaration-tests/produced-block-block.ts |  94 ++++++++
+ .../produced-block-definition.ts              |  52 +++++
+ .../produced-block-equality.ts                |  21 ++
+ .../produced-block-invalid.ts                 |  64 ++++++
+ .../produced-block.accepted.ts                | 200 ++++++++++++++++++
+ .../produced-block.consume.ts                 | 200 ++++++++++++++++++
+ .../produced-block.rejected.ts                |  47 ++++
+ .../scripts/check-emitted-declarations.ts     |  31 +++
+ 8 files changed, 709 insertions(+)
+ create mode 100644 packages/foldkit/declaration-tests/produced-block-block.ts
+ create mode 100644 packages/foldkit/declaration-tests/produced-block-definition.ts
+ create mode 100644 packages/foldkit/declaration-tests/produced-block-equality.ts
+ create mode 100644 packages/foldkit/declaration-tests/produced-block-invalid.ts
+ create mode 100644 packages/foldkit/declaration-tests/produced-block.accepted.ts
+ create mode 100644 packages/foldkit/declaration-tests/produced-block.consume.ts
+ create mode 100644 packages/foldkit/declaration-tests/produced-block.rejected.ts
+
+diff --git a/packages/foldkit/declaration-tests/produced-block-block.ts b/packages/foldkit/declaration-tests/produced-block-block.ts
+new file mode 100644
+index 000000000..e16bbd5be
+--- /dev/null
++++ b/packages/foldkit/declaration-tests/produced-block-block.ts
+@@ -0,0 +1,94 @@
++import { Effect, Layer } from 'effect'
++
++import {
++  CounterMessage,
++  HostDefinition,
++  Model,
++  SaveCount,
++  ViewDefinition,
++  ViewOutDefinition,
++  ViewlessDefinition,
++  ViewlessOutDefinition,
++} from './produced-block-definition.js'
++
++const ViewComposition = ViewDefinition.makeComposition()
++const viewImplementation = {
++  init: () => ({ model: Model.make({ count: 0 }) }),
++  update: ViewComposition.makeUpdate(model => ({ model })),
++  view: ViewComposition.makeView((model, h) =>
++    h.div([], [globalThis.String(model.count)]),
++  ),
++}
++export const assembleViewBlock = () =>
++  ViewComposition.assembleBlock(viewImplementation)
++export const AssembledViewBlock = assembleViewBlock()
++export const ViewBlock = ViewDefinition.produceBlock(assembleViewBlock)
++
++const ViewlessComposition = ViewlessDefinition.makeComposition()
++const viewlessImplementation = {
++  init: () => ({ model: Model.make({ count: 0 }) }),
++  update: ViewlessComposition.makeUpdate(model => ({ model })),
++}
++export const assembleViewlessBlock = () =>
++  ViewlessComposition.assembleBlock(viewlessImplementation)
++export const AssembledViewlessBlock = assembleViewlessBlock()
++export const ViewlessBlock = ViewlessDefinition.produceViewlessBlock(
++  assembleViewlessBlock,
++)
++
++const ViewOutComposition = ViewOutDefinition.makeComposition()
++const viewOutImplementation = {
++  init: () => ({ model: Model.make({ count: 0 }) }),
++  update: ViewOutComposition.makeUpdate(model => ({ model })),
++  view: ViewOutComposition.makeView((model, h) =>
++    h.div([], [globalThis.String(model.count)]),
++  ),
++}
++export const assembleViewOutBlock = () =>
++  ViewOutComposition.assembleBlock(viewOutImplementation)
++export const AssembledViewOutBlock = assembleViewOutBlock()
++export const ViewOutBlock = ViewOutDefinition.produceBlock(assembleViewOutBlock)
++
++const ViewlessOutComposition = ViewlessOutDefinition.makeComposition()
++const viewlessOutImplementation = {
++  init: () => ({ model: Model.make({ count: 0 }) }),
++  update: ViewlessOutComposition.makeUpdate(model => ({ model })),
++}
++export const assembleViewlessOutBlock = () =>
++  ViewlessOutComposition.assembleBlock(viewlessOutImplementation)
++export const AssembledViewlessOutBlock = assembleViewlessOutBlock()
++export const ViewlessOutBlock = ViewlessOutDefinition.produceViewlessBlock(
++  assembleViewlessOutBlock,
++)
++
++export const assembleReplacedBlock = () =>
++  AssembledViewBlock.replaceEffectsLayer(Layer.empty)
++export const AssembledReplacedBlock = assembleReplacedBlock()
++export const ReplacedBlock = ViewDefinition.produceBlock(assembleReplacedBlock)
++
++const HostComposition = HostDefinition.makeComposition()
++const AssembledHostBlock = HostComposition.assembleBlock({
++  init: () => ({ model: Model.make({ count: 0 }) }),
++  update: HostComposition.makeUpdate((model, message) =>
++    CounterMessage.match(message, {
++      ClickedIncrement: () => ({
++        model,
++        commands: [SaveCount({ count: model.count })],
++      }),
++      CompletedSaveCount: () => ({ model }),
++    }),
++  ),
++  view: HostComposition.makeView((model, h) =>
++    h.div([], [globalThis.String(model.count)]),
++  ),
++  EffectsLayer: Layer.empty,
++  hostHandlers: [SaveCount],
++})
++export const assembleProvidedBlock = () =>
++  AssembledHostBlock.provideHandlers(
++    SaveCount.toLayer(
++      Effect.succeed(() => Effect.succeed(CounterMessage.CompletedSaveCount())),
++    ),
++  )
++export const AssembledProvidedBlock = assembleProvidedBlock()
++export const ProvidedBlock = HostDefinition.produceBlock(assembleProvidedBlock)
+diff --git a/packages/foldkit/declaration-tests/produced-block-definition.ts b/packages/foldkit/declaration-tests/produced-block-definition.ts
+new file mode 100644
+index 000000000..07e6b41ec
+--- /dev/null
++++ b/packages/foldkit/declaration-tests/produced-block-definition.ts
+@@ -0,0 +1,52 @@
++import { Schema } from 'effect'
++import { Block, Message } from 'foldkit'
++
++export const Model = Schema.Struct({ count: Schema.Number })
++export const OtherModel = Schema.Struct({ name: Schema.String })
++export const CounterMessage = Message.defineMessageUnion({
++  ClickedIncrement: {},
++  CompletedSaveCount: {},
++})
++export const CounterOutMessage = Message.defineMessageUnion({
++  ReachedLimit: {},
++})
++
++const HostNamespace = Block.makeNamespace('ProducedHost')
++export const SaveCount = HostNamespace.makeCommand('SaveCount', {
++  args: { count: Schema.Number },
++  messages: [CounterMessage.CompletedSaveCount],
++})
++
++export const ViewDefinition = Block.makeDefinition('ProducedView', {
++  Model,
++  Message: CounterMessage,
++})
++export const ViewlessDefinition = Block.makeDefinition('ProducedViewless', {
++  Model,
++  Message: CounterMessage,
++})
++export const ViewOutDefinition = Block.makeDefinition('ProducedViewOut', {
++  Model,
++  Message: CounterMessage,
++  OutMessage: CounterOutMessage,
++})
++export const ViewlessOutDefinition = Block.makeDefinition(
++  'ProducedViewlessOut',
++  { Model, Message: CounterMessage, OutMessage: CounterOutMessage },
++)
++export const HostDefinition = HostNamespace.makeDefinition({
++  Model,
++  Message: CounterMessage,
++})
++export const ForeignDefinition = Block.makeDefinition('ProducedForeign', {
++  Model,
++  Message: CounterMessage,
++})
++export const SameIdDefinition = Block.makeDefinition('ProducedView', {
++  Model: OtherModel,
++  Message: CounterMessage,
++})
++export const ParentDefinition = Block.makeDefinition('ProducedParent', {
++  Model: Schema.Struct({ child: Model }),
++  Message: Message.defineMessageUnion({ ClickedParent: {} }),
++})
+diff --git a/packages/foldkit/declaration-tests/produced-block-equality.ts b/packages/foldkit/declaration-tests/produced-block-equality.ts
+new file mode 100644
+index 000000000..27a8dc1e0
+--- /dev/null
++++ b/packages/foldkit/declaration-tests/produced-block-equality.ts
+@@ -0,0 +1,21 @@
++export type Equal<Left, Right> =
++  (<Value>() => Value extends Left ? 1 : 2) extends <
++    Value,
++  >() => Value extends Right ? 1 : 2
++    ? (<Value>() => Value extends Right ? 1 : 2) extends <
++        Value,
++      >() => Value extends Left ? 1 : 2
++      ? true
++      : false
++    : false
++export type Assert<Value extends true> = Value
++export type MembersEqual<Left, Right> = Equal<
++  {
++    [Key in keyof Left]-?: Equal<
++      Left[Key],
++      Key extends keyof Right ? Right[Key] : never
++    >
++  }[keyof Left],
++  true
++>
++export type ReasonOf<Member> = Member[Exclude<keyof Member, 'evidence'>]
+diff --git a/packages/foldkit/declaration-tests/produced-block-invalid.ts b/packages/foldkit/declaration-tests/produced-block-invalid.ts
+new file mode 100644
+index 000000000..3f70eb33c
+--- /dev/null
++++ b/packages/foldkit/declaration-tests/produced-block-invalid.ts
+@@ -0,0 +1,64 @@
++import type { Block } from 'foldkit'
++
++import {
++  assembleViewBlock,
++  assembleViewlessBlock,
++} from './produced-block-block.js'
++import {
++  CounterMessage,
++  ForeignDefinition,
++  Model,
++  OtherModel,
++  SameIdDefinition,
++  ViewDefinition,
++  ViewlessDefinition,
++} from './produced-block-definition.js'
++
++const ForeignComposition = ForeignDefinition.makeComposition()
++const assembleForeignBlock = () =>
++  ForeignComposition.assembleBlock({
++    init: () => ({ model: Model.make({ count: 0 }) }),
++    update: ForeignComposition.makeUpdate(model => ({ model })),
++    view: ForeignComposition.makeView((_model, h) => h.div([])),
++  })
++
++const SameIdComposition = SameIdDefinition.makeComposition()
++const assembleSameIdBlock = () =>
++  SameIdComposition.assembleBlock({
++    init: () => ({ model: OtherModel.make({ name: '' }) }),
++    update: SameIdComposition.makeUpdate(model => ({ model })),
++    view: SameIdComposition.makeView((_model, h) => h.div([])),
++  })
++
++const ViewComposition = ViewDefinition.makeComposition()
++declare const erasedImplementation: Block.Implementation<
++  typeof Model.Type,
++  typeof CounterMessage.Type
++>
++const assembleErasedBlock = () =>
++  ViewComposition.assembleBlock(erasedImplementation)
++
++declare const neverProducer: never
++// oxlint-disable-next-line typescript/no-explicit-any -- This fixture verifies that an erased producer cannot type a produced Block.
++declare const anyProducer: any
++// oxlint-disable-next-line typescript/no-explicit-any -- This fixture verifies that an erased producer result cannot type a produced Block.
++const assembleAnyBlock = (): any => assembleViewBlock()
++const assembleEnrichedBlock = () =>
++  Object.assign(assembleViewBlock(), { extra: 1 })
++
++export const ForeignBlock = ViewDefinition.produceBlock(assembleForeignBlock)
++export const SameIdBlock = ViewDefinition.produceBlock(assembleSameIdBlock)
++export const NeverBlock = ViewDefinition.produceBlock(neverProducer)
++export const ErasedBlock = ViewDefinition.produceBlock(assembleErasedBlock)
++export const NotFunctionBlock = ViewDefinition.produceBlock(assembleViewBlock())
++export const ParameterBlock = ViewDefinition.produceBlock((_count: number) =>
++  assembleViewBlock(),
++)
++export const AnyProducerBlock = ViewDefinition.produceBlock(anyProducer)
++export const AnyResultBlock = ViewDefinition.produceBlock(assembleAnyBlock)
++export const EnrichedBlock = ViewDefinition.produceBlock(assembleEnrichedBlock)
++export const MissingViewBlock = ViewlessDefinition.produceBlock(
++  assembleViewlessBlock,
++)
++export const UnexpectedViewBlock =
++  ViewDefinition.produceViewlessBlock(assembleViewBlock)
+diff --git a/packages/foldkit/declaration-tests/produced-block.accepted.ts b/packages/foldkit/declaration-tests/produced-block.accepted.ts
+new file mode 100644
+index 000000000..abb3555c6
+--- /dev/null
++++ b/packages/foldkit/declaration-tests/produced-block.accepted.ts
+@@ -0,0 +1,200 @@
++import { Program } from 'foldkit'
++import type { Block } from 'foldkit'
++
++import {
++  AssembledProvidedBlock,
++  AssembledReplacedBlock,
++  AssembledViewBlock,
++  AssembledViewOutBlock,
++  AssembledViewlessBlock,
++  AssembledViewlessOutBlock,
++  ProvidedBlock,
++  ReplacedBlock,
++  ViewBlock,
++  ViewOutBlock,
++  ViewlessBlock,
++  ViewlessOutBlock,
++} from './produced-block-block.js'
++import {
++  CounterOutMessage,
++  Model,
++  ParentDefinition,
++} from './produced-block-definition.js'
++import type {
++  Assert,
++  Equal,
++  MembersEqual,
++  ReasonOf,
++} from './produced-block-equality.js'
++import {
++  AnyProducerBlock,
++  AnyResultBlock,
++  EnrichedBlock,
++  ErasedBlock,
++  ForeignBlock,
++  MissingViewBlock,
++  NeverBlock,
++  NotFunctionBlock,
++  ParameterBlock,
++  SameIdBlock,
++  UnexpectedViewBlock,
++} from './produced-block-invalid.js'
++
++export type ProducedKeys = [
++  Assert<Equal<keyof typeof ViewBlock, keyof typeof AssembledViewBlock>>,
++  Assert<
++    Equal<keyof typeof ViewlessBlock, keyof typeof AssembledViewlessBlock>
++  >,
++  Assert<Equal<keyof typeof ViewOutBlock, keyof typeof AssembledViewOutBlock>>,
++  Assert<
++    Equal<keyof typeof ViewlessOutBlock, keyof typeof AssembledViewlessOutBlock>
++  >,
++  Assert<
++    Equal<keyof typeof ReplacedBlock, keyof typeof AssembledReplacedBlock>
++  >,
++  Assert<
++    Equal<keyof typeof ProvidedBlock, keyof typeof AssembledProvidedBlock>
++  >,
++]
++
++export type ProducedMembers = [
++  Assert<MembersEqual<typeof AssembledViewBlock, typeof ViewBlock>>,
++  Assert<MembersEqual<typeof AssembledViewlessBlock, typeof ViewlessBlock>>,
++  Assert<MembersEqual<typeof AssembledViewOutBlock, typeof ViewOutBlock>>,
++  Assert<
++    MembersEqual<typeof AssembledViewlessOutBlock, typeof ViewlessOutBlock>
++  >,
++  Assert<MembersEqual<typeof AssembledReplacedBlock, typeof ReplacedBlock>>,
++  Assert<MembersEqual<typeof AssembledProvidedBlock, typeof ProvidedBlock>>,
++]
++
++export type DefinitionMembers = [
++  Assert<Equal<typeof ViewBlock.Model, typeof Model>>,
++  Assert<Equal<typeof ViewOutBlock.OutMessage, typeof CounterOutMessage>>,
++  Assert<Equal<typeof ViewBlock.OutMessage, undefined>>,
++  Assert<Equal<MembersEqual<{ a: 1 }, { a: 2 }>, false>>,
++]
++
++export const producedAsAnyBlock: ReadonlyArray<Block.AnyBlock> = [
++  ViewBlock,
++  ViewlessBlock,
++  ViewOutBlock,
++  ViewlessOutBlock,
++  ReplacedBlock,
++  ProvidedBlock,
++]
++
++const ViewBinding = ParentDefinition.makeBinding(ViewBlock, { field: 'child' })
++const AssembledViewBinding = ParentDefinition.makeBinding(AssembledViewBlock, {
++  field: 'child',
++})
++const ViewlessBinding = ParentDefinition.makeBinding(ViewlessBlock, {
++  field: 'child',
++})
++const AssembledViewlessBinding = ParentDefinition.makeBinding(
++  AssembledViewlessBlock,
++  { field: 'child' },
++)
++
++export type ProducedBindings = [
++  Assert<Equal<keyof typeof ViewBinding, keyof typeof AssembledViewBinding>>,
++  Assert<
++    Equal<typeof ViewBinding.embedView, typeof AssembledViewBinding.embedView>
++  >,
++  Assert<
++    Equal<
++      typeof ViewlessBinding.embedView,
++      typeof AssembledViewlessBinding.embedView
++    >
++  >,
++  Assert<
++    Equal<
++      typeof ViewBinding.embedView,
++      typeof AssembledViewlessBinding.embedView
++    > extends true
++      ? false
++      : true
++  >,
++]
++
++export const producedRoot = Program.makeElement({
++  block: ViewBlock,
++  container: document.body,
++})
++const assembledRoot = Program.makeElement({
++  block: AssembledViewBlock,
++  container: document.body,
++})
++
++export type ProducedRoot = Assert<
++  Equal<typeof producedRoot, typeof assembledRoot>
++>
++
++export type InvalidProducerReasons = [
++  Assert<
++    Equal<
++      ReasonOf<typeof ForeignBlock.init>,
++      'Block producer must return a Block of this Definition'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof SameIdBlock.init>,
++      'Block producer must return a Block of this Definition'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof NeverBlock.init>,
++      'Block producer must be a function with no parameters'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof ErasedBlock.init>,
++      'Block producer must return a completed Block'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof NotFunctionBlock.init>,
++      'Block producer must be a function with no parameters'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof ParameterBlock.init>,
++      'Block producer must be a function with no parameters'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof AnyProducerBlock.init>,
++      'Block producer must be a function with no parameters'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof AnyResultBlock.init>,
++      'Block producer must not return any'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof EnrichedBlock.init>,
++      'Block producer must return the completed Block. Add members to the produced Block instead.'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof MissingViewBlock.init>,
++      'produceBlock requires a Block with a default view. Use produceViewlessBlock.'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof UnexpectedViewBlock.init>,
++      'produceViewlessBlock requires a Block without a default view. Use produceBlock.'
++    >
++  >,
++]
+diff --git a/packages/foldkit/declaration-tests/produced-block.consume.ts b/packages/foldkit/declaration-tests/produced-block.consume.ts
+new file mode 100644
+index 000000000..abb3555c6
+--- /dev/null
++++ b/packages/foldkit/declaration-tests/produced-block.consume.ts
+@@ -0,0 +1,200 @@
++import { Program } from 'foldkit'
++import type { Block } from 'foldkit'
++
++import {
++  AssembledProvidedBlock,
++  AssembledReplacedBlock,
++  AssembledViewBlock,
++  AssembledViewOutBlock,
++  AssembledViewlessBlock,
++  AssembledViewlessOutBlock,
++  ProvidedBlock,
++  ReplacedBlock,
++  ViewBlock,
++  ViewOutBlock,
++  ViewlessBlock,
++  ViewlessOutBlock,
++} from './produced-block-block.js'
++import {
++  CounterOutMessage,
++  Model,
++  ParentDefinition,
++} from './produced-block-definition.js'
++import type {
++  Assert,
++  Equal,
++  MembersEqual,
++  ReasonOf,
++} from './produced-block-equality.js'
++import {
++  AnyProducerBlock,
++  AnyResultBlock,
++  EnrichedBlock,
++  ErasedBlock,
++  ForeignBlock,
++  MissingViewBlock,
++  NeverBlock,
++  NotFunctionBlock,
++  ParameterBlock,
++  SameIdBlock,
++  UnexpectedViewBlock,
++} from './produced-block-invalid.js'
++
++export type ProducedKeys = [
++  Assert<Equal<keyof typeof ViewBlock, keyof typeof AssembledViewBlock>>,
++  Assert<
++    Equal<keyof typeof ViewlessBlock, keyof typeof AssembledViewlessBlock>
++  >,
++  Assert<Equal<keyof typeof ViewOutBlock, keyof typeof AssembledViewOutBlock>>,
++  Assert<
++    Equal<keyof typeof ViewlessOutBlock, keyof typeof AssembledViewlessOutBlock>
++  >,
++  Assert<
++    Equal<keyof typeof ReplacedBlock, keyof typeof AssembledReplacedBlock>
++  >,
++  Assert<
++    Equal<keyof typeof ProvidedBlock, keyof typeof AssembledProvidedBlock>
++  >,
++]
++
++export type ProducedMembers = [
++  Assert<MembersEqual<typeof AssembledViewBlock, typeof ViewBlock>>,
++  Assert<MembersEqual<typeof AssembledViewlessBlock, typeof ViewlessBlock>>,
++  Assert<MembersEqual<typeof AssembledViewOutBlock, typeof ViewOutBlock>>,
++  Assert<
++    MembersEqual<typeof AssembledViewlessOutBlock, typeof ViewlessOutBlock>
++  >,
++  Assert<MembersEqual<typeof AssembledReplacedBlock, typeof ReplacedBlock>>,
++  Assert<MembersEqual<typeof AssembledProvidedBlock, typeof ProvidedBlock>>,
++]
++
++export type DefinitionMembers = [
++  Assert<Equal<typeof ViewBlock.Model, typeof Model>>,
++  Assert<Equal<typeof ViewOutBlock.OutMessage, typeof CounterOutMessage>>,
++  Assert<Equal<typeof ViewBlock.OutMessage, undefined>>,
++  Assert<Equal<MembersEqual<{ a: 1 }, { a: 2 }>, false>>,
++]
++
++export const producedAsAnyBlock: ReadonlyArray<Block.AnyBlock> = [
++  ViewBlock,
++  ViewlessBlock,
++  ViewOutBlock,
++  ViewlessOutBlock,
++  ReplacedBlock,
++  ProvidedBlock,
++]
++
++const ViewBinding = ParentDefinition.makeBinding(ViewBlock, { field: 'child' })
++const AssembledViewBinding = ParentDefinition.makeBinding(AssembledViewBlock, {
++  field: 'child',
++})
++const ViewlessBinding = ParentDefinition.makeBinding(ViewlessBlock, {
++  field: 'child',
++})
++const AssembledViewlessBinding = ParentDefinition.makeBinding(
++  AssembledViewlessBlock,
++  { field: 'child' },
++)
++
++export type ProducedBindings = [
++  Assert<Equal<keyof typeof ViewBinding, keyof typeof AssembledViewBinding>>,
++  Assert<
++    Equal<typeof ViewBinding.embedView, typeof AssembledViewBinding.embedView>
++  >,
++  Assert<
++    Equal<
++      typeof ViewlessBinding.embedView,
++      typeof AssembledViewlessBinding.embedView
++    >
++  >,
++  Assert<
++    Equal<
++      typeof ViewBinding.embedView,
++      typeof AssembledViewlessBinding.embedView
++    > extends true
++      ? false
++      : true
++  >,
++]
++
++export const producedRoot = Program.makeElement({
++  block: ViewBlock,
++  container: document.body,
++})
++const assembledRoot = Program.makeElement({
++  block: AssembledViewBlock,
++  container: document.body,
++})
++
++export type ProducedRoot = Assert<
++  Equal<typeof producedRoot, typeof assembledRoot>
++>
++
++export type InvalidProducerReasons = [
++  Assert<
++    Equal<
++      ReasonOf<typeof ForeignBlock.init>,
++      'Block producer must return a Block of this Definition'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof SameIdBlock.init>,
++      'Block producer must return a Block of this Definition'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof NeverBlock.init>,
++      'Block producer must be a function with no parameters'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof ErasedBlock.init>,
++      'Block producer must return a completed Block'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof NotFunctionBlock.init>,
++      'Block producer must be a function with no parameters'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof ParameterBlock.init>,
++      'Block producer must be a function with no parameters'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof AnyProducerBlock.init>,
++      'Block producer must be a function with no parameters'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof AnyResultBlock.init>,
++      'Block producer must not return any'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof EnrichedBlock.init>,
++      'Block producer must return the completed Block. Add members to the produced Block instead.'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof MissingViewBlock.init>,
++      'produceBlock requires a Block with a default view. Use produceViewlessBlock.'
++    >
++  >,
++  Assert<
++    Equal<
++      ReasonOf<typeof UnexpectedViewBlock.init>,
++      'produceViewlessBlock requires a Block without a default view. Use produceBlock.'
++    >
++  >,
++]
+diff --git a/packages/foldkit/declaration-tests/produced-block.rejected.ts b/packages/foldkit/declaration-tests/produced-block.rejected.ts
+new file mode 100644
+index 000000000..0dfc5da50
+--- /dev/null
++++ b/packages/foldkit/declaration-tests/produced-block.rejected.ts
+@@ -0,0 +1,47 @@
++import { Program } from 'foldkit'
++import type { Block } from 'foldkit'
++
++import { ViewlessBlock } from './produced-block-block.js'
++import { ParentDefinition } from './produced-block-definition.js'
++import {
++  AnyProducerBlock,
++  AnyResultBlock,
++  EnrichedBlock,
++  ErasedBlock,
++  ForeignBlock,
++  MissingViewBlock,
++  NeverBlock,
++  NotFunctionBlock,
++  ParameterBlock,
++  SameIdBlock,
++  UnexpectedViewBlock,
++} from './produced-block-invalid.js'
++
++// @ts-expect-error A Block assembled from a Definition with another id does not bind.
++ParentDefinition.makeBinding(ForeignBlock, { field: 'child' })
++// @ts-expect-error A Block with the same id and another Model does not bind.
++ParentDefinition.makeBinding(SameIdBlock, { field: 'child' })
++// @ts-expect-error A never producer types no Block.
++ParentDefinition.makeBinding(NeverBlock, { field: 'child' })
++// @ts-expect-error An erased implementation completes no Block.
++ParentDefinition.makeBinding(ErasedBlock, { field: 'child' })
++// @ts-expect-error A completed Block is not a producer function.
++ParentDefinition.makeBinding(NotFunctionBlock, { field: 'child' })
++// @ts-expect-error A producer cannot require a parameter.
++ParentDefinition.makeBinding(ParameterBlock, { field: 'child' })
++// @ts-expect-error An any producer types no Block.
++ParentDefinition.makeBinding(AnyProducerBlock, { field: 'child' })
++// @ts-expect-error A producer that returns any types no Block.
++ParentDefinition.makeBinding(AnyResultBlock, { field: 'child' })
++// @ts-expect-error A producer cannot add members to the completed Block.
++ParentDefinition.makeBinding(EnrichedBlock, { field: 'child' })
++// @ts-expect-error produceBlock requires a Block with a default view.
++ParentDefinition.makeBinding(MissingViewBlock, { field: 'child' })
++// @ts-expect-error produceViewlessBlock requires a Block without a default view.
++ParentDefinition.makeBinding(UnexpectedViewBlock, { field: 'child' })
++// @ts-expect-error A Block from another Definition is not an AnyBlock.
++export const foreignAsAnyBlock: Block.AnyBlock = ForeignBlock
++// @ts-expect-error A viewless produced Block cannot be a Program root.
++Program.makeElement({ block: ViewlessBlock, container: document.body })
++// @ts-expect-error A Block from another Definition cannot be a Program root.
++Program.makeElement({ block: ForeignBlock, container: document.body })
+diff --git a/packages/foldkit/scripts/check-emitted-declarations.ts b/packages/foldkit/scripts/check-emitted-declarations.ts
+index 036eaaaea..a791d4d3e 100644
+--- a/packages/foldkit/scripts/check-emitted-declarations.ts
++++ b/packages/foldkit/scripts/check-emitted-declarations.ts
+@@ -438,12 +438,30 @@ const assertPortableDeclarations = (directory: string): void => {
+   }
+ }
+ 
++const assertEmittedFragments = (
++  name: string,
++  directory: string,
++  fragmentsByFile: Readonly<Record<string, ReadonlyArray<string>>>,
++): void => {
++  for (const [file, fragments] of Object.entries(fragmentsByFile)) {
++    const source = readFileSync(join(directory, file), 'utf8')
++    for (const fragment of fragments) {
++      if (!source.includes(fragment)) {
++        fail(
++          `Emitted declaration ${file} for ${name} does not contain ${fragment}.`,
++        )
++      }
++    }
++  }
++}
++
+ const checks: ReadonlyArray<
+   Readonly<{
+     name: string
+     accepted: ReadonlyArray<string>
+     rejected: ReadonlyArray<string>
+     consumers: ReadonlyArray<string>
++    emittedFragments?: Readonly<Record<string, ReadonlyArray<string>>>
+   }>
+ > = [
+   {
+@@ -662,6 +680,18 @@ const checks: ReadonlyArray<
+     rejected: ['startup-defaults.rejected.ts'],
+     consumers: ['startup-defaults.consume.ts'],
+   },
++  {
++    name: 'produced-block',
++    accepted: ['produced-block.accepted.ts'],
++    rejected: ['produced-block.rejected.ts'],
++    consumers: ['produced-block.consume.ts'],
++    emittedFragments: {
++      'produced-block-block.d.ts': [
++        'ViewBlock: import("foldkit/block").ProducedBlockWithView<',
++        ', typeof assembleViewBlock>',
++      ],
++    },
++  },
+ ]
+ 
+ const main = async (): Promise<void> => {
+@@ -716,6 +746,7 @@ const main = async (): Promise<void> => {
+         acceptedConfig,
+       ])
+       assertPortableDeclarations(output)
++      assertEmittedFragments(check.name, output, check.emittedFragments ?? {})
+ 
+       const rejectedConfig = join(emitter, `${check.name}.rejected.json`)
+       writeFileSync(
+-- 
+2.55.0
+

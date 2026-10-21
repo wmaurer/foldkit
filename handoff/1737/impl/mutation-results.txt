@@ -1,0 +1,20 @@
+== owner check removed: gate exit 1
+[emitted-declarations] Emitting external produced-block declarations failed:
+produced-block.accepted.ts(134,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+   rejected fixture alone:
+produced-block.rejected.ts(20,1): error TS2578: Unused '@ts-expect-error' directive.
+produced-block.rejected.ts(42,1): error TS2578: Unused '@ts-expect-error' directive.
+produced-block.rejected.ts(46,1): error TS2578: Unused '@ts-expect-error' directive.
+== view check removed: gate exit 1
+[emitted-declarations] Emitting external produced-block declarations failed:
+produced-block.accepted.ts(188,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+produced-block.accepted.ts(194,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+   rejected fixture alone:
+produced-block.rejected.ts(38,1): error TS2578: Unused '@ts-expect-error' directive.
+produced-block.rejected.ts(40,1): error TS2578: Unused '@ts-expect-error' directive.
+== parameter check relaxed: gate exit 1
+[emitted-declarations] Emitting external produced-block declarations failed:
+produced-block.accepted.ts(164,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+   rejected fixture alone:
+produced-block.rejected.ts(30,1): error TS2578: Unused '@ts-expect-error' directive.
+restored

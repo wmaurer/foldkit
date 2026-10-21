@@ -1,0 +1,11 @@
+foldkit-build 0
+foldkit-typecheck 0
+foldkit-test 0
+check-emitted-declarations 0
+check-block-type-performance 0
+website-typecheck 0
+r-typecheck 1
+format-check 0
+lint 1
+DONE
+r-typecheck-rerun 0

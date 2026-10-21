@@ -1,0 +1,44 @@
+--- a/packages/foldkit/src/block/definition.ts
++++ b/packages/foldkit/src/block/definition.ts
+@@ -2527,6 +2527,29 @@
+   MessageSchema['Type'],
+   CheckedImplementationValue<ImplementationValue>
+ >
++
++interface LazyCompletedWithView<DefinitionValue, ImplementationValue> {
++  readonly Model: DefinitionValue extends Readonly<{ Model: infer ModelSchema extends AnySchema }> ? ModelSchema : never
++  readonly owner: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['owner']
++  readonly Message: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['Message']
++  readonly mounts: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['mounts']
++  readonly bindings: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['bindings']
++  readonly init: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['init']
++  readonly update: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['update']
++  readonly operations: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['operations']
++  readonly subscriptions: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['subscriptions']
++  readonly managedResources: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['managedResources']
++  readonly EffectsLayer: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['EffectsLayer']
++  readonly __blockHandlerRequirements: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['__blockHandlerRequirements']
++  readonly hostHandlers: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['hostHandlers']
++  readonly makeView: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['makeView']
++  readonly replaceEffectsLayer: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['replaceEffectsLayer']
++  readonly provideHandlers: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>['provideHandlers']
++  readonly [LocalMountsTypeId]: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>[typeof LocalMountsTypeId]
++  readonly [LocalEffectsLayerTypeId]: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>[typeof LocalEffectsLayerTypeId]
++  readonly [DefaultViewTypeId]: CompletedWithView<DefinitionValue, DefaultEffectsImplementation<ImplementationValue>>[typeof DefaultViewTypeId]
++  readonly OutMessage?: never
++}
+ 
+ /** Completes a Composition with its implementation channels and returns a
+  * passive Block. `init` and `update` are required. At an inferred concrete
+@@ -2853,10 +2876,7 @@
+         Children,
+         DefaultEffectsImplementation<ImplementationValue>
+       >,
+-  ): CompletedWithView<
+-    CompositionValue,
+-    DefaultEffectsImplementation<ImplementationValue>
+-  >
++  ): LazyCompletedWithView<CompositionValue, ImplementationValue>
+   <const ImplementationValue extends object>(
+     implementation: ImplementationValue &
+       NoInfer<

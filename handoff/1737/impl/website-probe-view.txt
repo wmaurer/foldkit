@@ -1,0 +1,84 @@
+src/block.ts(10,3): error TS2769: No overload matches this call.
+src/composition/composition.ts(71,65): error TS2769: No overload matches this call.
+src/entry.server.ts(14,7): error TS2769: No overload matches this call.
+src/entry.ts(7,17): error TS2589: Type instantiation is excessively deep and possibly infinite.
+src/entry.ts(7,30): error TS2769: No overload matches this call.
+src/entry.ts(24,17): error TS2739: Type 'Pending<undefined, { readonly currentYear: number; readonly today: { readonly year: number; readonly month: number; readonly day: number; }; readonly deploymen
+src/init.ts(31,3): error TS2345: Argument of type '(flags: typeof Flags.Type, url: Url) => { childInitContext: { route: { readonly _tag: "PreviewMigration"; } | { readonly _tag: "PreviewUpgrade"; } | 
+src/layout/docs.ts(810,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(810,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(827,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(827,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(844,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(844,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(861,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(861,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(878,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(878,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(895,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(895,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(912,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(912,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(929,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(929,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(946,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(946,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(963,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(963,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(980,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(980,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(997,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never;
+src/layout/docs.ts(997,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly 
+src/layout/docs.ts(1014,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1014,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1031,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1031,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1048,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1048,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1065,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1065,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1082,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1082,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1099,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1099,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1116,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1116,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1133,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1133,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1150,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1150,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1167,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1167,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1184,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1184,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1201,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1201,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1218,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1218,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1235,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1235,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1252,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1252,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1269,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1269,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1286,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1286,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1303,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1303,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/layout/docs.ts(1320,13): error TS2379: Argument of type 'BoundBlockConfig<BoundBlockView<AnyBlockView, Readonly<{ __blockBindingRequirement: Readonly<{ placement: any; generatedSchema: () => never
+src/layout/docs.ts(1320,38): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly
+src/page/apiReference/scene.test.ts(42,7): error TS2345: Argument of type '{ currentYear: number; today: { readonly year: number; readonly month: number; readonly day: number; }; deployment: { readonl
+src/page/example/scene.test.ts(65,18): error TS2345: Argument of type '{ currentYear: number; today: { readonly year: number; readonly month: number; readonly day: number; }; deployment: { readonly _t
+src/page/newsletter/newsletter.scene.test.ts(30,18): error TS2345: Argument of type '{ currentYear: number; today: { readonly year: number; readonly month: number; readonly day: number; }; deployment:
+src/page/ui/block.ts(5,10): error TS6133: 'view' is declared but its value is never read.
+src/page/ui/block.ts(11,5): error TS2769: No overload matches this call.
+src/story.test.ts(64,58): error TS2345: Argument of type '{ currentYear: number; today: { readonly year: number; readonly month: number; readonly day: number; }; deployment: { readonly _tag: "Canary";
+src/story.test.ts(101,7): error TS2345: Argument of type '{ currentYear: number; today: { readonly year: number; readonly month: number; readonly day: number; }; maybeApiData: Option.Option<never>; ma
+src/story.test.ts(114,33): error TS2345: Argument of type '{ currentYear: number; today: { readonly year: number; readonly month: number; readonly day: number; }; deployment: { readonly _tag: "Canary"
+src/story.test.ts(157,7): error TS2345: Argument of type '{ currentYear: number; today: { readonly year: number; readonly month: number; readonly day: number; }; deployment: { readonly _tag: "Canary";
+src/update/handleCompletedLoadBrowserEnvironment.ts(42,54): error TS2345: Argument of type '(model: { readonly route: { readonly _tag: "About"; } | { readonly _tag: "AiMcp"; } | { readonly _tag: "AiOv
+src/update/handleCompletedLoadBrowserEnvironment.ts(51,5): error TS2769: No overload matches this call.
+src/update/handleCompletedLoadBrowserEnvironment.ts(52,5): error TS2769: No overload matches this call.
+src/update/update.ts(20,57): error TS2345: Argument of type '(model: { readonly route: { readonly _tag: "Blog"; } | { readonly _tag: "Home"; } | { readonly _tag: "About"; } | { readonly _tag: "AiMcp";
+src/view/blog.ts(53,11): error TS2345: Argument of type 'BoundBlockConfig<BoundBlockView<Readonly<{ __blockViewOwner: Owner<"Ui", true>; __blockDefinitionView: Readonly<{ owner: (value: Owner<"Ui", tr
+src/view/blog.ts(53,36): error TS2345: Argument of type '{ slotId: string; model: { readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly fie

@@ -1,0 +1,35 @@
+From 6023a674fb77e39f90c1ee95b10868503a4ae56c Mon Sep 17 00:00:00 2001
+From: Wayne Maurer <wmaurer@users.noreply.github.com>
+Date: Wed, 21 Oct 2026 15:17:33 +0200
+Subject: [PATCH 6/8] refactor(website): produce the Ui Block from a named
+ producer
+
+assembleUiBlock assembles the Ui Composition, and UiDefinition.produceBlock
+publishes its result. model.ts reads UiBlock.Model, which now comes from
+the Definition without typing the producer.
+---
+ packages/website/src/page/ui/block.ts | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/packages/website/src/page/ui/block.ts b/packages/website/src/page/ui/block.ts
+index aec72dd25..3b0e3798b 100644
+--- a/packages/website/src/page/ui/block.ts
++++ b/packages/website/src/page/ui/block.ts
+@@ -4,10 +4,11 @@ import { init } from './init'
+ import { update } from './update'
+ import { view } from './view'
+ 
+-export const UiBlock = UiDefinition.produceBlock(() =>
++const assembleUiBlock = () =>
+   UiComposition.assembleBlock({
+     init,
+     update,
+     view,
+-  }),
+-)
++  })
++
++export const UiBlock = UiDefinition.produceBlock(assembleUiBlock)
+-- 
+2.55.0
+

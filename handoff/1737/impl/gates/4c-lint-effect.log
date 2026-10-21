@@ -1,0 +1,4 @@
+$ effect-tsgo patch --no-typescript --oxlint && oxlint --config .oxlintrc.effect.json --disable-nested-config --deny-warnings packages examples scripts
+Patched oxlint at /tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-impl/node_modules/.pnpm/@oxlint+binding-linux-x64-gnu@1.85.0/node_modules/@oxlint/binding-linux-x64-gnu/oxlint.linux-x64-gnu.node
+Patched oxlint-dts at /tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-impl/node_modules/.pnpm/oxlint@1.85.0_oxlint-tsgolint@7.0.2003/node_modules/oxlint/dist/index.d.ts
+Patched oxlint-tsgolint at /tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-impl/node_modules/.pnpm/@oxlint-tsgolint+linux-x64@7.0.2003/node_modules/@oxlint-tsgolint/linux-x64/tsgolint

@@ -1,0 +1,1 @@
+src/page/ui/modelProbe.ts(3,14): error TS2322: Type 'number' is not assignable to type '{ readonly buttonClickCount: number; readonly inputDemoValue: string; readonly textareaDemoValue: string; readonly fieldsetInputValue: string; readonly fieldsetTe

@@ -1,0 +1,1154 @@
+{
+  "metadata": {
+    "formatVersion": 2,
+    "measuredAt": "2026-10-21T13:53:18.487Z",
+    "sourceCommit": "20f29c4831f49a6e134674934c3b425174a65d90",
+    "sourceWorkloadDirty": false,
+    "workloadSha256": "2b77d7d0a379e75414e9f7523fec5d5e2a9fa11adb6dd142b704ca08fb15209a",
+    "lockfileSha256": "902ab6bb5623898c30dad99e6a2cdd18c7a292e356842d285283cfb11347907b",
+    "benchmarkScriptSha256": "d242450a4ec5edd939bbff36a355414317afb1644f85906f958030e482ae89c7",
+    "compilerPackageVersion": "7.0.2",
+    "nativeCompilerPackage": "@typescript/typescript-linux-x64",
+    "server": {
+      "name": "typescript-go",
+      "version": "7.0.2"
+    },
+    "nodeVersion": "v26.11.1",
+    "platform": "linux",
+    "architecture": "x64",
+    "runs": 3,
+    "timeoutMs": 30000,
+    "completionSnippetSupport": true,
+    "documentChangeMode": "Incremental ranges for Binding and changed URL workflows"
+  },
+  "workload": {
+    "hoverFirst": "packages/website/src/definition.ts#ApplicationDefinition",
+    "hoverAfterEdit": "packages/website/src/composition/composition.ts#SearchBinding",
+    "definitionFirst": "packages/website/src/composition/composition.ts#makeBinding",
+    "completion": "packages/website/src/update/handleChangedUrl.ts#previousRoute.",
+    "bindingCompletion": "packages/website/src/update/handleChangedUrl.ts#SearchBinding.|informRouteChanged()",
+    "changedUrlHover": "packages/website/src/update/handleChangedUrl.ts#SearchBinding at informRouteChanged()",
+    "changedUrlDiagnostics": {
+      "source": "packages/website/src/update/handleChangedUrl.ts",
+      "edit": "route: () => nextRoute becomes route: () => 1709, then restores nextRoute",
+      "expectedErrorCode": 2322,
+      "mode": "Full pull diagnostics without previousResultId"
+    }
+  },
+  "summary": [
+    {
+      "label": "hover.first",
+      "samplesMs": [
+        654.664,
+        643.271,
+        643.975
+      ],
+      "medianMs": 643.975,
+      "minimumMs": 643.271,
+      "maximumMs": 654.664
+    },
+    {
+      "label": "hover.warm",
+      "samplesMs": [
+        0.578,
+        0.776,
+        0.534
+      ],
+      "medianMs": 0.578,
+      "minimumMs": 0.534,
+      "maximumMs": 0.776
+    },
+    {
+      "label": "hover.postWhitespace",
+      "samplesMs": [
+        624.844,
+        622.716,
+        625.917
+      ],
+      "medianMs": 624.844,
+      "minimumMs": 622.716,
+      "maximumMs": 625.917
+    },
+    {
+      "label": "hover.postWhitespaceWarm",
+      "samplesMs": [
+        0.971,
+        0.813,
+        0.875
+      ],
+      "medianMs": 0.875,
+      "minimumMs": 0.813,
+      "maximumMs": 0.971
+    },
+    {
+      "label": "hover.postSemantic",
+      "samplesMs": [
+        582.831,
+        591.443,
+        593.528
+      ],
+      "medianMs": 591.443,
+      "minimumMs": 582.831,
+      "maximumMs": 593.528
+    },
+    {
+      "label": "hover.postSemanticWarm",
+      "samplesMs": [
+        0.889,
+        1.139,
+        1.132
+      ],
+      "medianMs": 1.132,
+      "minimumMs": 0.889,
+      "maximumMs": 1.139
+    },
+    {
+      "label": "definition.first",
+      "samplesMs": [
+        791.484,
+        788.478,
+        801.423
+      ],
+      "medianMs": 791.484,
+      "minimumMs": 788.478,
+      "maximumMs": 801.423
+    },
+    {
+      "label": "definition.warm",
+      "samplesMs": [
+        17.251,
+        17.184,
+        15.982
+      ],
+      "medianMs": 17.184,
+      "minimumMs": 15.982,
+      "maximumMs": 17.251
+    },
+    {
+      "label": "definition.postWhitespace",
+      "samplesMs": [
+        606.988,
+        587.18,
+        600.085
+      ],
+      "medianMs": 600.085,
+      "minimumMs": 587.18,
+      "maximumMs": 606.988
+    },
+    {
+      "label": "definition.postWhitespaceWarm",
+      "samplesMs": [
+        17.793,
+        17.603,
+        20.631
+      ],
+      "medianMs": 17.793,
+      "minimumMs": 17.603,
+      "maximumMs": 20.631
+    },
+    {
+      "label": "completion.first",
+      "samplesMs": [
+        256.56,
+        237.13,
+        249.2
+      ],
+      "medianMs": 249.2,
+      "minimumMs": 237.13,
+      "maximumMs": 256.56
+    },
+    {
+      "label": "completion.warm",
+      "samplesMs": [
+        0.884,
+        0.774,
+        1.25
+      ],
+      "medianMs": 0.884,
+      "minimumMs": 0.774,
+      "maximumMs": 1.25
+    },
+    {
+      "label": "completion.postWhitespace",
+      "samplesMs": [
+        28.517,
+        54.587,
+        51.622
+      ],
+      "medianMs": 51.622,
+      "minimumMs": 28.517,
+      "maximumMs": 54.587
+    },
+    {
+      "label": "completion.postWhitespaceWarm",
+      "samplesMs": [
+        0.919,
+        1.137,
+        1.322
+      ],
+      "medianMs": 1.137,
+      "minimumMs": 0.919,
+      "maximumMs": 1.322
+    },
+    {
+      "label": "bindingCompletion.first",
+      "samplesMs": [
+        782.335,
+        783.821,
+        803.546
+      ],
+      "medianMs": 783.821,
+      "minimumMs": 782.335,
+      "maximumMs": 803.546
+    },
+    {
+      "label": "bindingCompletion.warm",
+      "samplesMs": [
+        3.028,
+        2.407,
+        3.585
+      ],
+      "medianMs": 3.028,
+      "minimumMs": 2.407,
+      "maximumMs": 3.585
+    },
+    {
+      "label": "bindingCompletion.postWhitespace",
+      "samplesMs": [
+        579.295,
+        607.645,
+        595.435
+      ],
+      "medianMs": 595.435,
+      "minimumMs": 579.295,
+      "maximumMs": 607.645
+    },
+    {
+      "label": "bindingCompletion.postWhitespaceWarm",
+      "samplesMs": [
+        2.087,
+        2.086,
+        2.591
+      ],
+      "medianMs": 2.087,
+      "minimumMs": 2.086,
+      "maximumMs": 2.591
+    },
+    {
+      "label": "changedUrl.hover.first",
+      "samplesMs": [
+        833.113,
+        813.354,
+        820.351
+      ],
+      "medianMs": 820.351,
+      "minimumMs": 813.354,
+      "maximumMs": 833.113
+    },
+    {
+      "label": "changedUrl.hover.warm",
+      "samplesMs": [
+        0.854,
+        0.793,
+        1.567
+      ],
+      "medianMs": 0.854,
+      "minimumMs": 0.793,
+      "maximumMs": 1.567
+    },
+    {
+      "label": "changedUrl.hover.postWhitespace",
+      "samplesMs": [
+        637.382,
+        618.997,
+        623.078
+      ],
+      "medianMs": 623.078,
+      "minimumMs": 618.997,
+      "maximumMs": 637.382
+    },
+    {
+      "label": "changedUrl.hover.postWhitespaceWarm",
+      "samplesMs": [
+        0.756,
+        0.742,
+        0.795
+      ],
+      "medianMs": 0.756,
+      "minimumMs": 0.742,
+      "maximumMs": 0.795
+    },
+    {
+      "label": "changedUrl.diagnostics.clean",
+      "samplesMs": [
+        1126.324,
+        1116.969,
+        1128.805
+      ],
+      "medianMs": 1126.324,
+      "minimumMs": 1116.969,
+      "maximumMs": 1128.805
+    },
+    {
+      "label": "changedUrl.diagnostics.badRoute",
+      "samplesMs": [
+        1083.486,
+        1052.406,
+        1097.016
+      ],
+      "medianMs": 1083.486,
+      "minimumMs": 1052.406,
+      "maximumMs": 1097.016
+    },
+    {
+      "label": "changedUrl.diagnostics.restored",
+      "samplesMs": [
+        1153.425,
+        1146.62,
+        1115.245
+      ],
+      "medianMs": 1146.62,
+      "minimumMs": 1115.245,
+      "maximumMs": 1153.425
+    },
+    {
+      "label": "changedUrl.hover.postRestore",
+      "samplesMs": [
+        565.083,
+        565.495,
+        632.992
+      ],
+      "medianMs": 565.495,
+      "minimumMs": 565.083,
+      "maximumMs": 632.992
+    },
+    {
+      "label": "changedUrl.hover.postRestoreWarm",
+      "samplesMs": [
+        0.912,
+        0.785,
+        0.877
+      ],
+      "medianMs": 0.877,
+      "minimumMs": 0.785,
+      "maximumMs": 0.912
+    },
+    {
+      "label": "changedUrl.completion.postRestoreWarm",
+      "samplesMs": [
+        2.139,
+        1.977,
+        1.72
+      ],
+      "medianMs": 1.977,
+      "minimumMs": 1.72,
+      "maximumMs": 2.139
+    }
+  ],
+  "runs": [
+    {
+      "run": 1,
+      "measurements": [
+        {
+          "label": "hover.first",
+          "latencyMs": 654.664,
+          "resultBytes": 1253,
+          "resultSha256": "0ae45788be5e44f2ff25fcee61d2a884a24b49d5ec73fc608a347a09456a6e1d",
+          "documentVersion": 1,
+          "sourceSha256": "48d9d4ad1ef4b4e326e6d1b72d746b83ba6e1735831e22f3513abb5a7755897d"
+        },
+        {
+          "label": "hover.warm",
+          "latencyMs": 0.578,
+          "resultBytes": 1253,
+          "resultSha256": "0ae45788be5e44f2ff25fcee61d2a884a24b49d5ec73fc608a347a09456a6e1d",
+          "documentVersion": 1,
+          "sourceSha256": "48d9d4ad1ef4b4e326e6d1b72d746b83ba6e1735831e22f3513abb5a7755897d"
+        },
+        {
+          "label": "hover.postWhitespace",
+          "latencyMs": 624.844,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "hover.postWhitespaceWarm",
+          "latencyMs": 0.971,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "hover.postSemantic",
+          "latencyMs": 582.831,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 3,
+          "sourceSha256": "ee3d7e9a859d2ce90e6b986b1cc078c97ee59fb242fe98f3abddc800771acd4a"
+        },
+        {
+          "label": "hover.postSemanticWarm",
+          "latencyMs": 0.889,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 3,
+          "sourceSha256": "ee3d7e9a859d2ce90e6b986b1cc078c97ee59fb242fe98f3abddc800771acd4a"
+        },
+        {
+          "label": "definition.first",
+          "latencyMs": 791.484,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 1,
+          "sourceSha256": "e32e2ae6ea4bb4811209dd938e48540518098bdc758ac14c947092000506515b"
+        },
+        {
+          "label": "definition.warm",
+          "latencyMs": 17.251,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 1,
+          "sourceSha256": "e32e2ae6ea4bb4811209dd938e48540518098bdc758ac14c947092000506515b"
+        },
+        {
+          "label": "definition.postWhitespace",
+          "latencyMs": 606.988,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "definition.postWhitespaceWarm",
+          "latencyMs": 17.793,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "completion.first",
+          "latencyMs": 256.56,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 1,
+          "sourceSha256": "99b578fb00a2f9bf064e05de7c5c01a4367475179f0eef20e77f481e76803f21"
+        },
+        {
+          "label": "completion.warm",
+          "latencyMs": 0.884,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 1,
+          "sourceSha256": "99b578fb00a2f9bf064e05de7c5c01a4367475179f0eef20e77f481e76803f21"
+        },
+        {
+          "label": "completion.postWhitespace",
+          "latencyMs": 28.517,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 2,
+          "sourceSha256": "19d5d35a15a6cae7752744a1ae28bf5917d23e1939b72f16b27c4f45bf94b599"
+        },
+        {
+          "label": "completion.postWhitespaceWarm",
+          "latencyMs": 0.919,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 2,
+          "sourceSha256": "19d5d35a15a6cae7752744a1ae28bf5917d23e1939b72f16b27c4f45bf94b599"
+        },
+        {
+          "label": "bindingCompletion.first",
+          "latencyMs": 782.335,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "bindingCompletion.warm",
+          "latencyMs": 3.028,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "bindingCompletion.postWhitespace",
+          "latencyMs": 579.295,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "bindingCompletion.postWhitespaceWarm",
+          "latencyMs": 2.087,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.first",
+          "latencyMs": 833.113,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "changedUrl.hover.warm",
+          "latencyMs": 0.854,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "changedUrl.hover.postWhitespace",
+          "latencyMs": 637.382,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.postWhitespaceWarm",
+          "latencyMs": 0.756,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.diagnostics.clean",
+          "latencyMs": 1126.324,
+          "resultCount": 0,
+          "resultBytes": 26,
+          "resultSha256": "59a5219522e1ebb0c3be99f5df840ab89a8a9a9520fe1b353ebfc13a6dccbba6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe",
+          "diagnosticEvidence": {
+            "expected": "Clean",
+            "errorCount": 0
+          }
+        },
+        {
+          "label": "changedUrl.diagnostics.badRoute",
+          "latencyMs": 1083.486,
+          "resultCount": 1,
+          "resultBytes": 757,
+          "resultSha256": "f8e98e5b264ce9bdfa261140f5b83f231f25c7298eee36bd2f6574dc284226e6",
+          "documentVersion": 3,
+          "sourceSha256": "7db5dc37b52689b132971935fd0ec80c2c94eb5c3668e6b827da89f091b9e707",
+          "diagnosticEvidence": {
+            "expected": "RouteError",
+            "errorCount": 1,
+            "code": 2322,
+            "range": {
+              "start": {
+                "line": 32,
+                "character": 8
+              },
+              "end": {
+                "line": 32,
+                "character": 13
+              }
+            }
+          }
+        },
+        {
+          "label": "changedUrl.diagnostics.restored",
+          "latencyMs": 1153.425,
+          "resultCount": 0,
+          "resultBytes": 26,
+          "resultSha256": "59a5219522e1ebb0c3be99f5df840ab89a8a9a9520fe1b353ebfc13a6dccbba6",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe",
+          "diagnosticEvidence": {
+            "expected": "Clean",
+            "errorCount": 0
+          }
+        },
+        {
+          "label": "changedUrl.hover.postRestore",
+          "latencyMs": 565.083,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.postRestoreWarm",
+          "latencyMs": 0.912,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.completion.postRestoreWarm",
+          "latencyMs": 2.139,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "measurements": [
+        {
+          "label": "hover.first",
+          "latencyMs": 643.271,
+          "resultBytes": 1253,
+          "resultSha256": "0ae45788be5e44f2ff25fcee61d2a884a24b49d5ec73fc608a347a09456a6e1d",
+          "documentVersion": 1,
+          "sourceSha256": "48d9d4ad1ef4b4e326e6d1b72d746b83ba6e1735831e22f3513abb5a7755897d"
+        },
+        {
+          "label": "hover.warm",
+          "latencyMs": 0.776,
+          "resultBytes": 1253,
+          "resultSha256": "0ae45788be5e44f2ff25fcee61d2a884a24b49d5ec73fc608a347a09456a6e1d",
+          "documentVersion": 1,
+          "sourceSha256": "48d9d4ad1ef4b4e326e6d1b72d746b83ba6e1735831e22f3513abb5a7755897d"
+        },
+        {
+          "label": "hover.postWhitespace",
+          "latencyMs": 622.716,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "hover.postWhitespaceWarm",
+          "latencyMs": 0.813,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "hover.postSemantic",
+          "latencyMs": 591.443,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 3,
+          "sourceSha256": "ee3d7e9a859d2ce90e6b986b1cc078c97ee59fb242fe98f3abddc800771acd4a"
+        },
+        {
+          "label": "hover.postSemanticWarm",
+          "latencyMs": 1.139,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 3,
+          "sourceSha256": "ee3d7e9a859d2ce90e6b986b1cc078c97ee59fb242fe98f3abddc800771acd4a"
+        },
+        {
+          "label": "definition.first",
+          "latencyMs": 788.478,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 1,
+          "sourceSha256": "e32e2ae6ea4bb4811209dd938e48540518098bdc758ac14c947092000506515b"
+        },
+        {
+          "label": "definition.warm",
+          "latencyMs": 17.184,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 1,
+          "sourceSha256": "e32e2ae6ea4bb4811209dd938e48540518098bdc758ac14c947092000506515b"
+        },
+        {
+          "label": "definition.postWhitespace",
+          "latencyMs": 587.18,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "definition.postWhitespaceWarm",
+          "latencyMs": 17.603,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "completion.first",
+          "latencyMs": 237.13,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 1,
+          "sourceSha256": "99b578fb00a2f9bf064e05de7c5c01a4367475179f0eef20e77f481e76803f21"
+        },
+        {
+          "label": "completion.warm",
+          "latencyMs": 0.774,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 1,
+          "sourceSha256": "99b578fb00a2f9bf064e05de7c5c01a4367475179f0eef20e77f481e76803f21"
+        },
+        {
+          "label": "completion.postWhitespace",
+          "latencyMs": 54.587,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 2,
+          "sourceSha256": "19d5d35a15a6cae7752744a1ae28bf5917d23e1939b72f16b27c4f45bf94b599"
+        },
+        {
+          "label": "completion.postWhitespaceWarm",
+          "latencyMs": 1.137,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 2,
+          "sourceSha256": "19d5d35a15a6cae7752744a1ae28bf5917d23e1939b72f16b27c4f45bf94b599"
+        },
+        {
+          "label": "bindingCompletion.first",
+          "latencyMs": 783.821,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "bindingCompletion.warm",
+          "latencyMs": 2.407,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "bindingCompletion.postWhitespace",
+          "latencyMs": 607.645,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "bindingCompletion.postWhitespaceWarm",
+          "latencyMs": 2.086,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.first",
+          "latencyMs": 813.354,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "changedUrl.hover.warm",
+          "latencyMs": 0.793,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "changedUrl.hover.postWhitespace",
+          "latencyMs": 618.997,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.postWhitespaceWarm",
+          "latencyMs": 0.742,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.diagnostics.clean",
+          "latencyMs": 1116.969,
+          "resultCount": 0,
+          "resultBytes": 26,
+          "resultSha256": "59a5219522e1ebb0c3be99f5df840ab89a8a9a9520fe1b353ebfc13a6dccbba6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe",
+          "diagnosticEvidence": {
+            "expected": "Clean",
+            "errorCount": 0
+          }
+        },
+        {
+          "label": "changedUrl.diagnostics.badRoute",
+          "latencyMs": 1052.406,
+          "resultCount": 1,
+          "resultBytes": 757,
+          "resultSha256": "f8e98e5b264ce9bdfa261140f5b83f231f25c7298eee36bd2f6574dc284226e6",
+          "documentVersion": 3,
+          "sourceSha256": "7db5dc37b52689b132971935fd0ec80c2c94eb5c3668e6b827da89f091b9e707",
+          "diagnosticEvidence": {
+            "expected": "RouteError",
+            "errorCount": 1,
+            "code": 2322,
+            "range": {
+              "start": {
+                "line": 32,
+                "character": 8
+              },
+              "end": {
+                "line": 32,
+                "character": 13
+              }
+            }
+          }
+        },
+        {
+          "label": "changedUrl.diagnostics.restored",
+          "latencyMs": 1146.62,
+          "resultCount": 0,
+          "resultBytes": 26,
+          "resultSha256": "59a5219522e1ebb0c3be99f5df840ab89a8a9a9520fe1b353ebfc13a6dccbba6",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe",
+          "diagnosticEvidence": {
+            "expected": "Clean",
+            "errorCount": 0
+          }
+        },
+        {
+          "label": "changedUrl.hover.postRestore",
+          "latencyMs": 565.495,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.postRestoreWarm",
+          "latencyMs": 0.785,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.completion.postRestoreWarm",
+          "latencyMs": 1.977,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "measurements": [
+        {
+          "label": "hover.first",
+          "latencyMs": 643.975,
+          "resultBytes": 1253,
+          "resultSha256": "0ae45788be5e44f2ff25fcee61d2a884a24b49d5ec73fc608a347a09456a6e1d",
+          "documentVersion": 1,
+          "sourceSha256": "48d9d4ad1ef4b4e326e6d1b72d746b83ba6e1735831e22f3513abb5a7755897d"
+        },
+        {
+          "label": "hover.warm",
+          "latencyMs": 0.534,
+          "resultBytes": 1253,
+          "resultSha256": "0ae45788be5e44f2ff25fcee61d2a884a24b49d5ec73fc608a347a09456a6e1d",
+          "documentVersion": 1,
+          "sourceSha256": "48d9d4ad1ef4b4e326e6d1b72d746b83ba6e1735831e22f3513abb5a7755897d"
+        },
+        {
+          "label": "hover.postWhitespace",
+          "latencyMs": 625.917,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "hover.postWhitespaceWarm",
+          "latencyMs": 0.875,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "hover.postSemantic",
+          "latencyMs": 593.528,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 3,
+          "sourceSha256": "ee3d7e9a859d2ce90e6b986b1cc078c97ee59fb242fe98f3abddc800771acd4a"
+        },
+        {
+          "label": "hover.postSemanticWarm",
+          "latencyMs": 1.132,
+          "resultBytes": 1048,
+          "resultSha256": "d900b8792035df56d7c4fe0b747d1ce8101a30e6c3efb38ebc12b493aa9cf00c",
+          "documentVersion": 3,
+          "sourceSha256": "ee3d7e9a859d2ce90e6b986b1cc078c97ee59fb242fe98f3abddc800771acd4a"
+        },
+        {
+          "label": "definition.first",
+          "latencyMs": 801.423,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 1,
+          "sourceSha256": "e32e2ae6ea4bb4811209dd938e48540518098bdc758ac14c947092000506515b"
+        },
+        {
+          "label": "definition.warm",
+          "latencyMs": 15.982,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 1,
+          "sourceSha256": "e32e2ae6ea4bb4811209dd938e48540518098bdc758ac14c947092000506515b"
+        },
+        {
+          "label": "definition.postWhitespace",
+          "latencyMs": 600.085,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "definition.postWhitespaceWarm",
+          "latencyMs": 20.631,
+          "resultCount": 2,
+          "resultBytes": 939,
+          "resultSha256": "116931fe170b4fe375606cfb7c69969d537b49c784d08dff04930cd7314662c0",
+          "documentVersion": 2,
+          "sourceSha256": "dd46a27412ac59851a1e505f2fc86c35fed3be80795c838b20c34e9cff67dba1"
+        },
+        {
+          "label": "completion.first",
+          "latencyMs": 249.2,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 1,
+          "sourceSha256": "99b578fb00a2f9bf064e05de7c5c01a4367475179f0eef20e77f481e76803f21"
+        },
+        {
+          "label": "completion.warm",
+          "latencyMs": 1.25,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 1,
+          "sourceSha256": "99b578fb00a2f9bf064e05de7c5c01a4367475179f0eef20e77f481e76803f21"
+        },
+        {
+          "label": "completion.postWhitespace",
+          "latencyMs": 51.622,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 2,
+          "sourceSha256": "19d5d35a15a6cae7752744a1ae28bf5917d23e1939b72f16b27c4f45bf94b599"
+        },
+        {
+          "label": "completion.postWhitespaceWarm",
+          "latencyMs": 1.322,
+          "resultCount": 2,
+          "resultBytes": 592,
+          "resultSha256": "b965b50ffc906c6dcfda8f61af208514388f6956e90cfd61ae4bfd1330ee7879",
+          "documentVersion": 2,
+          "sourceSha256": "19d5d35a15a6cae7752744a1ae28bf5917d23e1939b72f16b27c4f45bf94b599"
+        },
+        {
+          "label": "bindingCompletion.first",
+          "latencyMs": 803.546,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "bindingCompletion.warm",
+          "latencyMs": 3.585,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "bindingCompletion.postWhitespace",
+          "latencyMs": 595.435,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "bindingCompletion.postWhitespaceWarm",
+          "latencyMs": 2.591,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.first",
+          "latencyMs": 820.351,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "changedUrl.hover.warm",
+          "latencyMs": 1.567,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 1,
+          "sourceSha256": "0522d6214ca2dadb8b6f67a222491ef0676bcadd5635e8024c7975030e4d4545"
+        },
+        {
+          "label": "changedUrl.hover.postWhitespace",
+          "latencyMs": 623.078,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.postWhitespaceWarm",
+          "latencyMs": 0.795,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.diagnostics.clean",
+          "latencyMs": 1128.805,
+          "resultCount": 0,
+          "resultBytes": 26,
+          "resultSha256": "59a5219522e1ebb0c3be99f5df840ab89a8a9a9520fe1b353ebfc13a6dccbba6",
+          "documentVersion": 2,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe",
+          "diagnosticEvidence": {
+            "expected": "Clean",
+            "errorCount": 0
+          }
+        },
+        {
+          "label": "changedUrl.diagnostics.badRoute",
+          "latencyMs": 1097.016,
+          "resultCount": 1,
+          "resultBytes": 757,
+          "resultSha256": "f8e98e5b264ce9bdfa261140f5b83f231f25c7298eee36bd2f6574dc284226e6",
+          "documentVersion": 3,
+          "sourceSha256": "7db5dc37b52689b132971935fd0ec80c2c94eb5c3668e6b827da89f091b9e707",
+          "diagnosticEvidence": {
+            "expected": "RouteError",
+            "errorCount": 1,
+            "code": 2322,
+            "range": {
+              "start": {
+                "line": 32,
+                "character": 8
+              },
+              "end": {
+                "line": 32,
+                "character": 13
+              }
+            }
+          }
+        },
+        {
+          "label": "changedUrl.diagnostics.restored",
+          "latencyMs": 1115.245,
+          "resultCount": 0,
+          "resultBytes": 26,
+          "resultSha256": "59a5219522e1ebb0c3be99f5df840ab89a8a9a9520fe1b353ebfc13a6dccbba6",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe",
+          "diagnosticEvidence": {
+            "expected": "Clean",
+            "errorCount": 0
+          }
+        },
+        {
+          "label": "changedUrl.hover.postRestore",
+          "latencyMs": 632.992,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.hover.postRestoreWarm",
+          "latencyMs": 0.877,
+          "resultBytes": 1043,
+          "resultSha256": "c86a8e46ad461949045005e1a73476290fdc30dd4d7a96e867163c578075b083",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        },
+        {
+          "label": "changedUrl.completion.postRestoreWarm",
+          "latencyMs": 1.72,
+          "resultCount": 6,
+          "resultBytes": 1732,
+          "resultSha256": "e93df157e390e6215c5d937e6e840532a731268fe891e479cfdec234b9249ae6",
+          "documentVersion": 4,
+          "sourceSha256": "1aeeac7ed811547336108cff5a33829dd1cdf73322bb8c5d6b580d17c4fd11fe"
+        }
+      ]
+    }
+  ]
+}

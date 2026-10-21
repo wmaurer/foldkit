@@ -1,0 +1,9 @@
+$ pnpm --filter foldkit --filter @foldkit/ui check:emitted-declarations
+Scope: 2 of 53 workspace projects
+packages/foldkit check:emitted-declarations$ node scripts/check-emitted-declarations.ts
+packages/foldkit check:emitted-declarations: [emitted-declarations] Emitted declaration produced-block-block.d.ts for produced-block does not contain ViewBlock: Block.ProducedBlockWithView<.
+packages/foldkit check:emitted-declarations: Failed
+/tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-impl/packages/foldkit:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] foldkit@0.168.0 check:emitted-declarations: `node scripts/check-emitted-declarations.ts`
+Exit status 1
+[ELIFECYCLE] Command failed with exit code 1.

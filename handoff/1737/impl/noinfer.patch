@@ -1,0 +1,233 @@
+diff --git a/packages/foldkit/src/block/definition.ts b/packages/foldkit/src/block/definition.ts
+index ab0b9b2e5..1ac196f35 100644
+--- a/packages/foldkit/src/block/definition.ts
++++ b/packages/foldkit/src/block/definition.ts
+@@ -1891,7 +1891,7 @@ interface BlockOperations<
+           >
+         >
+       >,
+-  ) => Block<
++  ) => NoInfer<Block<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -1899,7 +1899,7 @@ interface BlockOperations<
+     Mounts,
+     Children,
+     SelectedEffectsImplementation<ImplementationValue, SelectedEffectsLayer>
+-  >
++  >>
+   /**
+    * Supplies the declared host-owned handler services with an ordinary Layer.
+    */
+@@ -1910,7 +1910,7 @@ interface BlockOperations<
+     : <const HandlersLayer extends AnyLayer>(
+         HandlersLayer: HandlersLayer &
+           ValidateProvidedHandlers<ImplementationValue, HandlersLayer>,
+-      ) => Block<
++      ) => NoInfer<Block<
+         OwnerValue,
+         ModelSchema,
+         MessageSchema,
+@@ -1918,7 +1918,7 @@ interface BlockOperations<
+         Mounts,
+         Children,
+         ProvideHandlerImplementation<ImplementationValue, HandlersLayer>
+-      >
++      >>
+ }
+ 
+ /**
+@@ -2566,7 +2566,7 @@ export interface AssembleBlock<
+         Children,
+         ImplementationValue
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -2578,7 +2578,7 @@ export interface AssembleBlock<
+       MessageSchema,
+       ImplementationValue
+     >
+-  >
++  >>
+   <
+     const Init,
+     const UpdateFunction,
+@@ -2630,7 +2630,7 @@ export interface AssembleBlock<
+       NoInfer<
+         DefinitionImplementation<ModelSchema, MessageSchema, OutMessageSchema>
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -2642,7 +2642,7 @@ export interface AssembleBlock<
+       MessageSchema,
+       ViewImplementation<Init, UpdateFunction, View, EffectsLayer>
+     >
+-  >
++  >>
+   <
+     const Init,
+     const UpdateFunction,
+@@ -2707,7 +2707,7 @@ export interface AssembleBlock<
+       NoInfer<
+         DefinitionImplementation<ModelSchema, MessageSchema, OutMessageSchema>
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -2725,7 +2725,7 @@ export interface AssembleBlock<
+         EffectsLayer
+       >
+     >
+-  >
++  >>
+   <
+     const Init,
+     const UpdateFunction,
+@@ -2791,7 +2791,7 @@ export interface AssembleBlock<
+       NoInfer<
+         DefinitionImplementation<ModelSchema, MessageSchema, OutMessageSchema>
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -2810,7 +2810,7 @@ export interface AssembleBlock<
+         AdditionalImplementation
+       >
+     >
+-  >
++  >>
+   <
+     const CompositionValue extends AssembleBlockComposition<
+       OwnerValue,
+@@ -2853,10 +2853,10 @@ export interface AssembleBlock<
+         Children,
+         DefaultEffectsImplementation<ImplementationValue>
+       >,
+-  ): CompletedWithView<
++  ): NoInfer<CompletedWithView<
+     CompositionValue,
+     DefaultEffectsImplementation<ImplementationValue>
+-  >
++  >>
+   <const ImplementationValue extends object>(
+     implementation: ImplementationValue &
+       NoInfer<
+@@ -2888,7 +2888,7 @@ export interface AssembleBlock<
+         Children,
+         DefaultEffectsImplementation<ImplementationValue>
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -2900,7 +2900,7 @@ export interface AssembleBlock<
+       MessageSchema,
+       DefaultEffectsImplementation<ImplementationValue>
+     >
+-  >
++  >>
+   <
+     const ErasedImplementation extends Omit<
+       DefinitionImplementation<ModelSchema, MessageSchema, OutMessageSchema>,
+@@ -2944,7 +2944,7 @@ export interface AssembleBlock<
+         Children,
+         ImplementationValue
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -2956,7 +2956,7 @@ export interface AssembleBlock<
+       MessageSchema,
+       ImplementationValue
+     >
+-  >
++  >>
+   <
+     const Init,
+     const UpdateFunction,
+@@ -3022,7 +3022,7 @@ export interface AssembleBlock<
+       NoInfer<
+         DefinitionImplementation<ModelSchema, MessageSchema, OutMessageSchema>
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -3041,7 +3041,7 @@ export interface AssembleBlock<
+         EffectsLayer
+       >
+     >
+-  >
++  >>
+   <
+     const Init,
+     const UpdateFunction,
+@@ -3103,7 +3103,7 @@ export interface AssembleBlock<
+       NoInfer<
+         DefinitionImplementation<ModelSchema, MessageSchema, OutMessageSchema>
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -3121,7 +3121,7 @@ export interface AssembleBlock<
+         EffectsLayer
+       >
+     >
+-  >
++  >>
+   <
+     const Init,
+     const UpdateFunction,
+@@ -3187,7 +3187,7 @@ export interface AssembleBlock<
+       NoInfer<
+         DefinitionImplementation<ModelSchema, MessageSchema, OutMessageSchema>
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -3206,7 +3206,7 @@ export interface AssembleBlock<
+         EffectsLayer
+       >
+     >
+-  >
++  >>
+   <
+     const Init,
+     const UpdateFunction,
+@@ -3268,7 +3268,7 @@ export interface AssembleBlock<
+       NoInfer<
+         DefinitionImplementation<ModelSchema, MessageSchema, OutMessageSchema>
+       >,
+-  ): CompletedBlock<
++  ): NoInfer<CompletedBlock<
+     OwnerValue,
+     ModelSchema,
+     MessageSchema,
+@@ -3286,7 +3286,7 @@ export interface AssembleBlock<
+         EffectsLayer
+       >
+     >
+-  >
++  >>
+ }
+ 
+ /**

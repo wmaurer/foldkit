@@ -1,0 +1,2 @@
+fixture                 instDelta  instMax  typesDelta  typesMax  symbolsDelta  status                       
+produced-composition-8  1,253,018  625,053  128,913     46,321    137,495       failed: Instantiations, Types

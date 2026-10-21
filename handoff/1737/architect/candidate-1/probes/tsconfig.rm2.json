@@ -1,0 +1,1 @@
+{ "compilerOptions": { "strict": true, "exactOptionalPropertyTypes": true, "noUncheckedIndexedAccess": true, "noEmit": true, "module": "NodeNext", "moduleResolution": "NodeNext", "target": "ES2022", "lib": ["ESNext","DOM"], "types": [], "skipLibCheck": true }, "files": ["rm2.ts"] }

@@ -1,0 +1,1 @@
+{ "compilerOptions": { "strict": true, "exactOptionalPropertyTypes": false, "noUncheckedIndexedAccess": true, "noEmit": true, "module": "NodeNext", "moduleResolution": "NodeNext", "target": "ES2022", "lib": ["ESNext","DOM"], "types": [], "skipLibCheck": true }, "files": ["accepted.ts"] }

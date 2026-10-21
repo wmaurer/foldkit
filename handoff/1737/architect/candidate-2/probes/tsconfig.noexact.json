@@ -1,0 +1,1 @@
+{ "compilerOptions": { "strict": true, "exactOptionalPropertyTypes": false, "noEmit": true, "module": "NodeNext", "moduleResolution": "NodeNext", "target": "ES2022", "lib": ["ESNext","DOM"], "types": [], "skipLibCheck": true, "allowImportingTsExtensions": true, "rewriteRelativeImportExtensions": false }, "include": ["shapes.ts","rejected.ts","chained.ts","harness.ts"] }

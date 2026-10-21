@@ -1,0 +1,1 @@
+$ oxlint --config .oxlintrc.app.json --disable-nested-config examples packages/website/src packages/typing-game/client/src

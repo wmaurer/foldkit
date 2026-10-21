@@ -1,0 +1,6 @@
+$ node scripts/check-emitted-declarations.ts
+[emitted-declarations] Emitting external produced-block declarations failed:
+../../../../../../../foldkit-declaration-consumers-iGT65b/emitter/fixtures/produced-block.accepted.ts(164,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+/tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-impl/packages/foldkit:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] foldkit@0.168.0 check:emitted-declarations: `node scripts/check-emitted-declarations.ts`
+Exit status 1

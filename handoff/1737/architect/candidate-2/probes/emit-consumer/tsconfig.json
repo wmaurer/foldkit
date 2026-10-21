@@ -1,0 +1,1 @@
+{ "compilerOptions": { "strict": true, "exactOptionalPropertyTypes": true, "noUncheckedIndexedAccess": true, "skipLibCheck": false, "module": "NodeNext", "moduleResolution": "NodeNext", "target": "ES2022", "lib": ["ESNext","DOM"], "types": [], "noEmit": true, "verbatimModuleSyntax": true }, "files": ["consumer.ts"] }

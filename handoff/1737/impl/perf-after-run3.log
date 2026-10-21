@@ -1,0 +1,17 @@
+$ pnpm --filter foldkit check:block-type-performance
+$ node scripts/check-block-type-performance.ts
+[block-type-performance] Measuring baseline...
+[block-type-performance] Measuring deep-composition-8...
+[block-type-performance] Measuring wide-composition-100...
+[block-type-performance] Measuring command-requirements-200...
+[block-type-performance] Measuring produced-composition-8...
+fixture                   instDelta  instMax    typesDelta  typesMax  symbolsDelta  status                
+------------------------  ---------  ---------  ----------  --------  ------------  ----------------------
+deep-composition-8        877,971    1,152,618  45,904      55,843    63,551        ok                    
+wide-composition-100      1,961,798  3,132,298  74,685      216,662   106,647       ok                    
+command-requirements-200  910,997    2,659,415  67,277      389,460   110,511       ok                    
+produced-composition-8    622,421    622,271    46,321      46,321    63,862        failed: Instantiations
+/tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-impl/packages/foldkit:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] foldkit@0.168.0 check:block-type-performance: `node scripts/check-block-type-performance.ts`
+Exit status 1
+[ELIFECYCLE] Command failed with exit code 1.

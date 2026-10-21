@@ -1,0 +1,71 @@
+### 90452b21a feat(foldkit): type produced Blocks from one producer verdict
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+packages/foldkit/src/block/define.ts
+packages/foldkit/src/block/definition.ts
+packages/foldkit/src/block/produced.ts
+packages/foldkit/src/block/public.ts
+### 5f8a67db3 feat(foldkit): verify the producing Definition at runtime
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+packages/foldkit/src/block/define.ts
+packages/foldkit/src/block/definition.ts
+packages/foldkit/src/block/produceBlock.test.ts
+### 3b1814406 test(foldkit): check produced Block declarations
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+packages/foldkit/declaration-tests/produced-block-block.ts
+packages/foldkit/declaration-tests/produced-block-definition.ts
+packages/foldkit/declaration-tests/produced-block-equality.ts
+packages/foldkit/declaration-tests/produced-block-invalid.ts
+packages/foldkit/declaration-tests/produced-block.accepted.ts
+packages/foldkit/declaration-tests/produced-block.consume.ts
+packages/foldkit/declaration-tests/produced-block.rejected.ts
+packages/foldkit/scripts/check-emitted-declarations.ts
+### f2d2d307c test(foldkit): budget produced Block composition
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+packages/foldkit/type-performance/README.md
+packages/foldkit/type-performance/budgets.json
+packages/foldkit/type-performance/fixtures.json
+packages/foldkit/type-performance/produced-composition-8.ts
+### 5b3e0104f refactor(website): produce the Ui Block from a named producer
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+packages/website/src/page/ui/block.ts
+### ccb169c8c docs(foldkit): clarify the produceBlock producer guidance
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+packages/foldkit/src/block/define.ts
+### b1b44fa08 chore(foldkit): add the produceBlock changeset
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+.changeset/definition-produce-block.md
+### 33fc89bc2 refactor(website): read the Ui Model from the produced UiBlock
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+packages/foldkit/type-performance/README.md
+packages/website/src/model.ts
+packages/website/src/page/ui/index.ts
+### 20f29c483 docs(website): name produceBlock in the Model Schema guidance
+
+Author: Wayne Maurer <wmaurer@users.noreply.github.com>
+
+
+packages/website/src/page/projectOrganization.md

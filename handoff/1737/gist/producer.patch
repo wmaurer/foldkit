@@ -1,0 +1,133 @@
+diff --git a/packages/foldkit/src/block/produced.ts b/packages/foldkit/src/block/produced.ts
+new file mode 100644
+--- /dev/null
++++ b/packages/foldkit/src/block/produced.ts
+@@ -0,0 +1,84 @@
++import type { Schema } from 'effect'
++
++import type { DefaultViewTypeId } from './defaultView.js'
++import type { LocalEffectsLayerTypeId, LocalMountsTypeId } from './definition.js'
++
++type InvalidBlockProducer = Readonly<{
++  'Block producer must return a completed Block': never
++}>
++
++type ProducedMember<Producer, Key extends PropertyKey> = [Producer] extends [never]
++  ? InvalidBlockProducer
++  : Producer extends (...args: ReadonlyArray<any>) => infer Completed
++    ? [Completed] extends [never]
++      ? InvalidBlockProducer
++      : Key extends keyof Completed
++        ? Completed[Key]
++        : InvalidBlockProducer
++    : InvalidBlockProducer
++
++interface ProducedBlockFields<
++  ModelSchema extends Schema.Codec<any, any, any, any>,
++  Producer,
++> {
++  readonly Model: ModelSchema
++  readonly owner: ProducedMember<Producer, 'owner'>
++  readonly Message: ProducedMember<Producer, 'Message'>
++  readonly mounts: ProducedMember<Producer, 'mounts'>
++  readonly [LocalMountsTypeId]: ProducedMember<Producer, typeof LocalMountsTypeId>
++  readonly bindings: ProducedMember<Producer, 'bindings'>
++  readonly init: ProducedMember<Producer, 'init'>
++  readonly update: ProducedMember<Producer, 'update'>
++  readonly operations: ProducedMember<Producer, 'operations'>
++  readonly subscriptions: ProducedMember<Producer, 'subscriptions'>
++  readonly managedResources: ProducedMember<Producer, 'managedResources'>
++  readonly EffectsLayer: ProducedMember<Producer, 'EffectsLayer'>
++  readonly [LocalEffectsLayerTypeId]: ProducedMember<
++    Producer,
++    typeof LocalEffectsLayerTypeId
++  >
++  readonly __blockHandlerRequirements: ProducedMember<
++    Producer,
++    '__blockHandlerRequirements'
++  >
++  readonly hostHandlers: ProducedMember<Producer, 'hostHandlers'>
++  readonly makeView: ProducedMember<Producer, 'makeView'>
++  readonly replaceEffectsLayer: ProducedMember<Producer, 'replaceEffectsLayer'>
++  readonly provideHandlers: ProducedMember<Producer, 'provideHandlers'>
++}
++
++/** Retains an independent Model Schema and a producer's exact completed capabilities. */
++export interface ProducedBlockWithViewAndOutMessage<
++  ModelSchema extends Schema.Codec<any, any, any, any>,
++  Producer,
++> extends ProducedBlockFields<ModelSchema, Producer> {
++  readonly OutMessage: ProducedMember<Producer, 'OutMessage'>
++  readonly [DefaultViewTypeId]: ProducedMember<Producer, typeof DefaultViewTypeId>
++}
++
++/** Retains an independent Model Schema and a producer's exact completed view capabilities. */
++export interface ProducedBlockWithView<
++  ModelSchema extends Schema.Codec<any, any, any, any>,
++  Producer,
++> extends ProducedBlockFields<ModelSchema, Producer> {
++  readonly OutMessage?: never
++  readonly [DefaultViewTypeId]: ProducedMember<Producer, typeof DefaultViewTypeId>
++}
++
++/** Retains an independent Model Schema and a producer's exact completed OutMessage capabilities. */
++export interface ProducedBlockWithOutMessage<
++  ModelSchema extends Schema.Codec<any, any, any, any>,
++  Producer,
++> extends ProducedBlockFields<ModelSchema, Producer> {
++  readonly OutMessage: ProducedMember<Producer, 'OutMessage'>
++  readonly [DefaultViewTypeId]?: never
++}
++
++/** Retains an independent Model Schema and a producer's exact completed capabilities without a view or OutMessage. */
++export interface ProducedBlockWithoutViewOrOutMessage<
++  ModelSchema extends Schema.Codec<any, any, any, any>,
++  Producer,
++> extends ProducedBlockFields<ModelSchema, Producer> {
++  readonly OutMessage?: never
++  readonly [DefaultViewTypeId]?: never
++}
+diff --git a/packages/foldkit/src/block/public.ts b/packages/foldkit/src/block/public.ts
+--- a/packages/foldkit/src/block/public.ts
++++ b/packages/foldkit/src/block/public.ts
+@@ -84,6 +84,12 @@
+   RefineViewInputs,
+ } from './definition.js'
+ export { makeDefinition, makeNamespace } from './define.js'
++export type {
++  ProducedBlockWithOutMessage,
++  ProducedBlockWithView,
++  ProducedBlockWithViewAndOutMessage,
++  ProducedBlockWithoutViewOrOutMessage,
++} from './produced.js'
+ export type { DefineStepFields, DefineStepNoop } from './fieldStep.js'
+ export type { CommandsStep, MakeCommandsStep } from './commandsStep.js'
+ export type {
+diff --git a/packages/website/src/page/ui/block.ts b/packages/website/src/page/ui/block.ts
+--- a/packages/website/src/page/ui/block.ts
++++ b/packages/website/src/page/ui/block.ts
+@@ -1,10 +1,19 @@
++import type { Block } from 'foldkit'
++
+ import { UiComposition } from './composition'
+ import { init } from './init'
++import { Model } from './model'
+ import { update } from './update'
+ import { view } from './view'
+ 
+-export const UiBlock = UiComposition.assembleBlock({
+-  init,
+-  update,
+-  view,
+-})
++const makeUiBlock = () =>
++  UiComposition.assembleBlock({
++    init,
++    update,
++    view,
++  })
++
++export const UiBlock: Block.ProducedBlockWithView<
++  typeof Model,
++  typeof makeUiBlock
++> = makeUiBlock()

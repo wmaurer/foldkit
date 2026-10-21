@@ -1,0 +1,53 @@
+Scope: 52 of 53 workspace projects
+comparisons/pixel-art-react typecheck$ tsc --noEmit
+packages/create-foldkit-app typecheck$ tsc -p tsconfig.json --noEmit
+packages/examples-e2e typecheck$ tsc --noEmit
+packages/foldkit typecheck$ tsc -p tsconfig.json --noEmit
+packages/examples-e2e typecheck: Done
+packages/oxlint-plugin-foldkit typecheck$ tsc --noEmit
+packages/create-foldkit-app typecheck: Done
+packages/typing-game/shared typecheck$ tsc --noEmit
+packages/typing-game/shared typecheck: Done
+packages/oxlint-plugin-foldkit typecheck: Done
+comparisons/pixel-art-react typecheck: Done
+packages/foldkit typecheck: Done
+packages/node typecheck$ tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json
+packages/markdown typecheck$ tsc -p tsconfig.json --noEmit
+packages/vite-plugin-foldkit typecheck$ tsc -b --noEmit && tsc -p tsconfig.test.json
+packages/typing-game/server typecheck$ tsc --noEmit
+packages/markdown typecheck: Done
+packages/typing-game/server typecheck: src/game.ts(3,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/handler/createRoom.ts(5,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/handler/getRoomById.ts(4,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/handler/joinRoom.ts(5,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/handler/joinRoom.ts(48,17): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/joinRoom.ts(56,49): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'object'.
+packages/typing-game/server typecheck: src/handler/joinRoom.ts(57,26): error TS7006: Parameter 'players' implicitly has an 'any' type.
+packages/typing-game/server typecheck: src/handler/startGame.ts(14,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/handler/startGame.ts(37,11): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/startGame.ts(46,48): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/startGame.ts(54,38): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/startGame.ts(57,42): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(16,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(35,13): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(36,36): error TS18046: 'player' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(42,37): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(45,21): error TS2571: Object is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(46,21): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(51,31): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'object'.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(131,59): error TS18046: 'room' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/subscribeToRoom.ts(136,17): error TS18046: 'game' is of type 'unknown'.
+packages/typing-game/server typecheck: src/handler/updatePlayerProgress.ts(4,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/index.ts(7,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/index.ts(75,21): error TS2769: No overload matches this call.
+packages/typing-game/server typecheck:   The last overload gave the following error.
+packages/typing-game/server typecheck:     Argument of type 'Effect<never, any, any>' is not assignable to parameter of type 'Effect<never, any, never>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+packages/typing-game/server typecheck:       Type 'any' is not assignable to type 'never'.
+packages/typing-game/server typecheck: src/roomById.ts(3,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/scoring.ts(12,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: src/scoring.ts(63,17): error TS18046: 'game' is of type 'unknown'.
+packages/typing-game/server typecheck: src/store.ts(3,25): error TS2307: Cannot find module '@typing-game/shared' or its corresponding type declarations.
+packages/typing-game/server typecheck: Failed
+/tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-pr/packages/typing-game/server:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] @typing-game/server@0.1.0 typecheck: `tsc --noEmit`
+Exit status 1

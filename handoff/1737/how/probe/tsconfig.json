@@ -1,0 +1,5 @@
+{
+  "extends": "/tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-base/tsconfig.base.json",
+  "compilerOptions": { "module": "NodeNext", "moduleResolution": "NodeNext", "noEmit": true, "noUnusedLocals": false, "allowImportingTsExtensions": true, "types": [] },
+  "files": ["probe3.ts"]
+}

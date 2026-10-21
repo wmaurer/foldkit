@@ -1,0 +1,44 @@
+$ pnpm build:packages && pnpm --filter @typing-game/shared build && pnpm lint:ci
+$ node scripts/build-public-packages.mjs
+Scope: 9 of 53 workspace projects
+packages/create-foldkit-app build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/build-templates.mjs
+packages/foldkit build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/oxlint-plugin-foldkit build$ pnpm run clean && rolldown -c rolldown.config.ts && tsc -b tsconfig.build.json && node scripts/generate-presets.mjs
+packages/oxlint-plugin-foldkit build: $ rimraf dist recommended.json all.json *.tsbuildinfo
+packages/foldkit build: $ rimraf dist *.tsbuildinfo
+packages/create-foldkit-app build: $ rimraf dist *.tsbuildinfo
+packages/oxlint-plugin-foldkit build: <DIR>/index.js  chunk │ size: 636.61 kB
+packages/oxlint-plugin-foldkit build: ✔ rolldown v1.2.11 Finished in 135.05 ms
+packages/oxlint-plugin-foldkit build: Done
+packages/create-foldkit-app build: Done
+packages/foldkit build: Done
+packages/markdown build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/vite-plugin-foldkit build$ pnpm run clean && tsc -b
+packages/node build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/markdown build: $ rimraf dist *.tsbuildinfo
+packages/vite-plugin-foldkit build: $ rimraf dist *.tsbuildinfo
+packages/node build: $ rimraf dist *.tsbuildinfo
+packages/markdown build: Done
+packages/vite-plugin-foldkit build: Done
+packages/node build: Done
+packages/devtools-mcp build$ pnpm run clean && tsc -b && pnpm run bundle
+packages/ui build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/brand-dist.mjs
+packages/devtools-mcp build: $ rimraf dist *.tsbuildinfo
+packages/ui build: $ rimraf dist *.tsbuildinfo
+packages/devtools-mcp build: $ rolldown -c rolldown.config.ts
+packages/devtools-mcp build: <DIR>/server.js  chunk │ size: 1,563.15 kB
+packages/devtools-mcp build: ✔ rolldown v1.2.11 Finished in 166.73 ms
+packages/devtools-mcp build: Done
+packages/ui build: brand-dist(@foldkit/ui): branded 49 files, skipped 77
+packages/ui build: Done
+packages/devtools build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/brand-dist.mjs
+packages/devtools build: $ rimraf dist *.tsbuildinfo
+packages/devtools build: brand-dist(@foldkit/devtools): branded 2 files, skipped 2
+packages/devtools build: Done
+$ tsc
+$ oxlint --disable-nested-config && pnpm lint:applications && pnpm lint:effect
+packages/ui/declaration-tests/generic-composition.accepted.ts:283:14: error foldkit(block-name-matches-variable): Block Composition identifier "KeyedAnimationComposition" must be "KeyedAnimationFixtureComposition".
+packages/ui/declaration-tests/generic-composition.rejected.ts:10:3: error eslint(sort-imports): Member 'AnimationBinding' of the import declaration should be sorted alphabetically. help: Replace `ApplicationDefinition, AnimationBinding, DialogBinding, DragAndDropBinding, KeyedDragAndDropBinding, KeyedAnimationBinding, KeyedToastBinding, MenuFoldFixtureDefinition, MenuPicker, OtherToastBinding, Picker, PickerBinding, RootSlid...` with `AnimationBinding, ApplicationDefinition, DialogBinding, DragAndDropBinding, KeyedAnimationBinding, KeyedDragAndDropBinding, KeyedToastBinding, MenuFoldFixtureDefinition, MenuPicker, OtherToastBinding, Picker, PickerBinding, RootSlid...`.
+packages/foldkit/declaration-tests/commands-steps.rejected.ts:48:7: error eslint(no-unused-vars): Variable 'outMessageStep' is declared but never used. Unused variables should start with a '_'. help: Consider removing this declaration.
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.

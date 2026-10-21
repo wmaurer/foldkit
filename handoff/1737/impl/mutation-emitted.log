@@ -1,0 +1,19 @@
+$ node scripts/check-emitted-declarations.ts
+[emitted-declarations] Emitting external produced-block declarations failed:
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block-invalid.ts(53,61): error TS2345: Argument of type 'CompletedWithView<Composition<Owner<"ProducedView", true>, Struct<{ readonly count: Number; }>, MessageUnion<{ readonly ClickedIncrement: {}; readonly CompletedSaveCount: {}; }>, undefined, readonly [], readonly []>, Readonly<...>>' is not assignable to parameter of type '() => unknown'.
+  Type 'CompletedWithView<Composition<Owner<"ProducedView", true>, Struct<{ readonly count: Number; }>, MessageUnion<{ readonly ClickedIncrement: {}; readonly CompletedSaveCount: {}; }>, undefined, readonly [], readonly []>, Readonly<...>>' provides no match for the signature '(): unknown'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block-invalid.ts(55,3): error TS2345: Argument of type '(_count: number) => Block.CompletedWithView<Block.Composition<Block.Owner<"ProducedView", true>, Struct<{ readonly count: Number; }>, MessageUnion<{ readonly ClickedIncrement: {}; readonly CompletedSaveCount: {}; }>, undefined, readonly [], readonly []>, Readonly<...>>' is not assignable to parameter of type '() => unknown'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(134,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(140,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(147,34): error TS2339: Property 'init' does not exist on type 'never'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(153,35): error TS2339: Property 'init' does not exist on type 'never'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(159,23): error TS18046: 'NotFunctionBlock' is of type 'unknown'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(165,23): error TS18046: 'ParameterBlock' is of type 'unknown'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(170,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(176,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(182,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+../../../../../../../foldkit-declaration-consumers-Wmaap0/emitter/fixtures/produced-block.accepted.ts(188,5): error TS2344: Type 'false' does not satisfy the constraint 'true'.
+/tmp/claude-10604308/-home-mrwe1-office-begasoft-ch-projects-foldkit-foldkit/962e359b-1e5f-438a-81f8-73fb99a793e4/scratchpad/wt-impl/packages/foldkit:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] foldkit@0.168.0 check:emitted-declarations: `node scripts/check-emitted-declarations.ts`
+Exit status 1

@@ -1,0 +1,75 @@
+== 1. type probes, exactOptionalPropertyTypes on (tsc 7.0.2 -p tsconfig.json)
+   expected: no diagnostics in shapes.ts chained.ts messages.ts; rejected.ts 13 x TS2769 + 1 x TS2589 (Program root); roots.ts the same family
+     14 rejected.ts
+      9 roots.ts
+   TS2769 lines in rejected.ts:
+89 90 91 93 94 95 96 98 99 100 101 103 104 
+== 2. same probes with exactOptionalPropertyTypes off (tsconfig.noexact.json)
+     14 rejected.ts
+   TS2769 count in rejected.ts: 13
+== 3. deferral matrix, instantiations to read one member (TS 6.0.3 API, defer/count.mjs)
+form                                    Model      owner OutMessage    Message makeBinding
+eager-assembleBlock                    155169     155169     155168     155169     163492
+prototype-inline-arrow                   1955    1180124       1954    1180124    1189576
+prototype-named-producer                 1955     155495       1954     155495     164842
+candidate2-inline-arrow                  2074       2074       2073    1181218    1190523
+candidate2-named-producer                2074       2074       2073     156594     165793
+candidate2-function-declaration          2074       2074       2073     156594     165793
+   whole-program instantiations, tsc 7.0.2 --extendedDiagnostics (includes about 101k of shared fixture head)
+   ea   153985 
+   mb   154279 
+   ma   1148625 
+   mc   154279 
+   pa   1148274 
+   pb   153928 
+== 4. what makes inline arrows expensive: producer passed through a signature (whole program / read .Model on TS 6.0.3)
+   tax-naked                    whole 1148589    read-Model 124
+   tax-function                 whole 1148610    read-Model 148
+   tax-object                   whole 1148337    read-Model 124
+   tax-contextual-signature     whole 156401     read-Model 156798
+   tax-intersection-guard       whole 155237     read-Model 155634
+   tax-named                    whole 153907     read-Model 124
+== 5. twenty independent Blocks per file
+   eager   whole 397664     read 20x .Model 401430
+   inline  whole 2248006    read 20x .Model 3942
+   named   whole 398276     read 20x .Model 3942
+== 6. budget fixtures: AuthoringDefinition gains two methods (tsc 7.0.2 instantiations, prototype dist vs candidate dist)
+   baseline                   prototype 1841      candidate2 1841
+   deep-composition-8         prototype 879962    candidate2 884648
+   wide-composition-100       prototype 1963639   candidate2 1977815
+   command-requirements-200   prototype 912704    candidate2 913348
+== 7. declaration emit (noEmitOnError, skipLibCheck false, exactOptionalPropertyTypes)
+   emit.ts: emitted, exit 0
+   childblock.ts + parentblock.ts: emitted, exit 0
+   consumer of emitted emit.d.ts: exit 0
+   consumer of emitted cross-module d.ts: exit 0
+== 8. generic factory with a Definition in scope (factory/)
+   consumer.new.ts        281
+   consumer.old.ts        83013
+   consumer.new.msg.ts    87435
+== 9. runtime (node runtime.mjs against the patched copy of dist)
+   ok                 produce view block returns the identical object 
+   ok                 produce a second assemble of the same Definition 
+   ok                 produceHeadless returns the identical object 
+   ok                 chained replaceEffectsLayer result is accepted 
+   ok                 chained result is registered to the same Definition 
+   rejected           foreign Definition, different id 
+       [foldkit] Definition "Own" produceBlock received a Block assembled for Definition "Foreign". Return a Block that a Composition of "Own" assembled.
+   rejected           separate Block.makeDefinition with the same id and Model 
+       [foldkit] Definition "Own" produceBlock received a Block assembled for a separate Definition that is also named "Own". Return a Block that a Composition of "Own" assembled.
+   ok                 shared-namespace sibling accepted for itself 
+   rejected           shared-namespace sibling Definition, same owner object and Model 
+       [foldkit] Definition "Shared" produceBlock received a Block assembled for a separate Definition that is also named "Shared". Return a Block that a Composition of "Shared" assembled.
+   rejected           non-function argument 
+       [foldkit] Definition "Own" produceBlock expects a function that returns a completed Block.
+   rejected           producer returns a plain object 
+       [foldkit] Definition "Own" produceBlock expects the producer to return a Block completed by assembleBlock.
+   rejected           producer returns undefined 
+       [foldkit] Definition "Own" produceBlock expects the producer to return a Block completed by assembleBlock.
+   rejected           view declared, headless produced 
+       [foldkit] Definition "Own" produceBlock received a Block without a default view. Use produceHeadlessBlock.
+   rejected           headless declared, view produced 
+       [foldkit] Definition "Own" produceHeadlessBlock received a Block with a default view. Use produceBlock.
+   rejected           replaceEffectsLayer chain from a foreign block 
+       [foldkit] Definition "Own" produceBlock received a Block assembled for Definition "Foreign". Return a Block that a Composition of "Own" assembled.
+   ALL AS EXPECTED

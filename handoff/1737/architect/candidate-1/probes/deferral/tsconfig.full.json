@@ -1,0 +1,1 @@
+{ "extends": "./tsconfig.json", "include": [], "files": ["candidateAssembledConst.ts", "consumer.m3init.candidateAssembledConst.ts"] }
